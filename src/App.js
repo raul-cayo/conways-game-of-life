@@ -5,35 +5,59 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
-      speed: 1000
+      counter: 0,
+      speed: 1000,
+      currentTimer: null
     };
+
+    this.handleSpeedChange = this.handleSpeedChange.bind(this);
   }
 
-  // Lyfecycle Methods //
+  // ----- Lyfecycle Methods ----- //
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
+    const timerID = setTimeout(
+      () => this.nextGeneration(),
+      this.state.speed
     );
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  // Component Methods //
-  tick() {
     this.setState({
-      date: new Date()
+      currentTimer: timerID
     });
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.state.timerID);
+  }
+
+  // ----- App Methods ----- //
+  nextGeneration() {
+    const timerID = setTimeout(
+      () => this.nextGeneration(),
+      this.state.speed
+    );
+
+    this.setState((prevState) => ({
+      counter: prevState.counter + 1,
+      speed: prevState.speed,
+      currentTimer: timerID
+    }));
+  }
+
+  handleSpeedChange(e) {
+    this.setState({speed: e.target.value});
+  }
+
+  // ----- Render ----- //
   render() {
     return (
       <div className="app-container">
         <p>Building Conway's Game Of Life</p>
-        <p>{this.state.date.toLocaleTimeString()}</p>
+        <p>{this.state.counter}</p>
+        <p>Speed:</p>
+        <input type="number"
+          value={this.state.speed}
+          onChange={this.handleSpeedChange}
+        />
       </div>
     );
   }
