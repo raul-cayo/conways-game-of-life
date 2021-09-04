@@ -5,7 +5,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date()
+      date: new Date(),
+      speed: 1000
     };
   }
 
@@ -30,11 +31,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>Building Conway's Game Of Life</p>
-          <p>{this.state.date.toLocaleTimeString()}</p>
-        </header>
+      <div className="app-container">
+        <p>Building Conway's Game Of Life</p>
+        <p>{this.state.date.toLocaleTimeString()}</p>
       </div>
     );
   }
