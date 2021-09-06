@@ -7,10 +7,32 @@
 
 .grid-container {
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .controls-container {
   background-color: transparent;
   border-top: 1px solid white;
+  display: flex;
   height: 100px;
+  justify-content: space-evenly;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Grid.js */
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.grid-row {
+  display: flex;
 }
