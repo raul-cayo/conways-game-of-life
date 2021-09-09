@@ -1,7 +1,7 @@
 {
   "name": "conways-game-of-life",
   "version": "0.1.0",
-  "description": "A clean implementation of Conway's Game of Life that you can manipulate to see its beauty in diferent colors and sizes.",
+  "description": "A clean implementation of Conway's Game of Life that you can manipulate to see its beauty in different colors and sizes.",
   "private": true,
   "license": "ISC",
   "keywords": [
