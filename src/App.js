@@ -18,12 +18,14 @@ class App extends React.Component {
       onColor: 'indianred',
       offColor: 'black',
       cellSize: 30,
-      currentTimer: null
+      currentTimer: null,
+      isPaused: false
     };
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.getNewGeneration = this.getNewGeneration.bind(this);
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
+    this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
   }
 
   // ----- Lyfecycle Methods ----- //
@@ -40,17 +42,18 @@ class App extends React.Component {
   nextGenerationTicker() {
     const timerID = setTimeout(this.nextGenerationTicker, this.state.speed);
     this.setState((prevState) => {
-      const newGeneration = this.getNewGeneration( prevState.generation );
+      const newGeneration = this.getNewGeneration(prevState.generation);
       return {
         counter: prevState.counter + 1,
         speed: prevState.speed,
         currentTimer: timerID,
-        generation: newGeneration
+        generation: newGeneration,
+        isPaused: false
       };
     });
   }
 
-  getNewGeneration( prevGeneration ) {
+  getNewGeneration(prevGeneration) {
     const newGeneration = [];
     const newGridSize = this.getNewGridSize(this.state.cellSize);
     const prevGenerationAdj = this.getPrevGenerationAdj(prevGeneration, newGridSize);
@@ -98,7 +101,7 @@ class App extends React.Component {
     return newGeneration;
   }
 
-  getNewGridSize( cellSize ) {
+  getNewGridSize(cellSize) {
     return {
       x: Math.floor(window.innerWidth / cellSize),
       y: Math.floor((window.innerHeight - 101) / cellSize)
@@ -169,6 +172,22 @@ class App extends React.Component {
     this.setState({speed: e.target.value});
   }
 
+  handlePausePlayGame(e) {
+    if (this.state.isPaused) {
+      this.nextGenerationTicker();
+    } else {
+      clearTimeout(this.state.currentTimer);
+      this.setState({
+          isPaused: true,
+          currentTimer: null
+      });
+    }
+  }
+
+  // handleCellClick(e) {
+  //   console.log(e.target);
+  // }
+
   // ----- Render ----- //
   render() {
     return (
@@ -180,6 +199,13 @@ class App extends React.Component {
             cellSize={this.state.cellSize}/>
         </div>
         <div className="controls-container">
+          <div className="control">
+            <button type="button"
+              className="btn btn-primary"
+              onClick={this.handlePausePlayGame}>
+              {this.state.isPaused ? 'Play' : 'Pause'}
+            </button>
+          </div>
           <div className="control">
             <p>Speed</p>
             <input type="number"
