@@ -26,6 +26,7 @@ class App extends React.Component {
     this.getNewGeneration = this.getNewGeneration.bind(this);
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
+    this.handleCellClick = this.handleCellClick.bind(this);
   }
 
   // ----- Lyfecycle Methods ----- //
@@ -184,9 +185,17 @@ class App extends React.Component {
     }
   }
 
-  // handleCellClick(e) {
-  //   console.log(e.target);
-  // }
+  handleCellClick(xIndex, yIndex) {
+    this.setState((prevState) => {
+      const newGeneration = [];
+      for (let row of prevState.generation) {
+        newGeneration.push([...row]);
+      }
+      const newCellState = prevState.generation[yIndex][xIndex] ? 0 : 1;
+      newGeneration[yIndex][xIndex] = newCellState;
+      return {generation: newGeneration};
+    });
+  }
 
   // ----- Render ----- //
   render() {
@@ -196,7 +205,8 @@ class App extends React.Component {
           <Grid generation={this.state.generation} 
             onColor={this.state.onColor}
             offColor={this.state.offColor}
-            cellSize={this.state.cellSize}/>
+            cellSize={this.state.cellSize}
+            cellClickHandler={this.handleCellClick}/>
         </div>
         <div className="controls-container">
           <div className="control">

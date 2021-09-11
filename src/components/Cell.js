@@ -8,7 +8,7 @@ class Cell extends React.Component {
       width: this.props.size
     };
 
-    return <div style={cellStyle}></div>;
+    return <div onClick={this.props.onClick} style={cellStyle}></div>;
   }
 }
 

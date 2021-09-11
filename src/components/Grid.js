@@ -10,7 +10,8 @@ class Grid extends React.Component {
           isOn={cellState}
           onColor={this.props.onColor}
           offColor={this.props.offColor}
-          size={this.props.cellSize + 'px'}/>
+          size={this.props.cellSize + 'px'}
+          onClick={() => this.props.cellClickHandler(cellIndex, rowIndex)}/>
       );
       return <div className="grid-row" key={rowIndex}>{cells}</div>;
     });
