@@ -25,6 +25,7 @@ class App extends React.Component {
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.getNewGeneration = this.getNewGeneration.bind(this);
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
+    this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
   }
@@ -173,6 +174,10 @@ class App extends React.Component {
     this.setState({speed: e.target.value});
   }
 
+  handleCellSizeChange(e) {
+    this.setState({cellSize: e.target.value});
+  }
+
   handlePausePlayGame(e) {
     if (this.state.isPaused) {
       this.nextGenerationTicker();
@@ -221,6 +226,12 @@ class App extends React.Component {
             <input type="number"
               value={this.state.speed}
               onChange={this.handleSpeedChange}/>
+          </div>
+          <div className="control">
+            <p>Cell Size</p>
+            <input type="number"
+              value={this.state.cellSize}
+              onChange={this.handleCellSizeChange}/>
           </div>
           <div className="control">
             <p>Counter</p>
