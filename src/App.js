@@ -16,7 +16,7 @@ class App extends React.Component {
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0]
       ],
-      onColor: '#84BA63',
+      onColor: '#61A84D',
       offColor: '#404040',
       cellSize: 30,
       currentTimer: null,
@@ -230,25 +230,27 @@ class App extends React.Component {
           </div>
           <div className="control">
             <button type="button"
-              className="btn btn-light"
+              className="btn pause-play-btn"
               onClick={this.handlePausePlayGame}>
               {this.state.isPaused ? 'Play' : 'Pause'}
             </button>
           </div>
           <div className="control">
-            <p>Speed</p>
+            <label>Speed</label>
             <input type="number"
+              className="number-input"
               value={this.state.speed}
               onChange={this.handleSpeedChange}/>
           </div>
           <div className="control">
-            <p>Cell Size</p>
+            <label>Cell Size</label>
             <input type="number"
+              className="number-input"
               value={this.state.cellSize}
               onChange={this.handleCellSizeChange}/>
           </div>
           <div className="control">
-            <p>Colors</p>
+            <label>Colors</label>
             <div className="color-picker">
               <input type="color" 
                 className="form-control form-control-color" 
@@ -263,7 +265,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="control">
-            <p>Counter</p>
+            <label>Counter</label>
             <p>{this.state.counter}</p>
           </div>
         </div>

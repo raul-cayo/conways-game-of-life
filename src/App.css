@@ -31,6 +31,28 @@
   width: auto;
 }
 
+.pause-play-btn {
+  background-color: #61A84D;
+  color: white;
+  font-weight: bold;
+  width: 70px;
+}
+
+.number-input {
+  background-color: #404040;
+  border: 2px solid #707070;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+}
+
+.form-control-color {
+  background-color: #707070;
+  border: 2px solid #707070;
+  margin: 0 5px;
+  padding: 0;
+}
+
 .color-picker {
   display: flex;
   flex-direction: row;
