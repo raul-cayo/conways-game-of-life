@@ -26,6 +26,11 @@
   text-align: center;
 }
 
+.color-picker {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Grid.js */
 .grid {
   display: flex;

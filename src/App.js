@@ -15,8 +15,8 @@ class App extends React.Component {
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0]
       ],
-      onColor: 'indianred',
-      offColor: 'black',
+      onColor: '#000000',
+      offColor: '#ffffff',
       cellSize: 30,
       currentTimer: null,
       isPaused: false
@@ -26,6 +26,8 @@ class App extends React.Component {
     this.getNewGeneration = this.getNewGeneration.bind(this);
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
+    this.handleOffColorChange = this.handleOffColorChange.bind(this);
+    this.handleOnColorChange = this.handleOnColorChange.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
   }
@@ -178,6 +180,14 @@ class App extends React.Component {
     this.setState({cellSize: e.target.value});
   }
 
+  handleOffColorChange(e) {
+    this.setState({offColor: e.target.value});
+  }
+
+  handleOnColorChange(e) {
+    this.setState({onColor: e.target.value});
+  }
+
   handlePausePlayGame(e) {
     if (this.state.isPaused) {
       this.nextGenerationTicker();
@@ -216,7 +226,7 @@ class App extends React.Component {
         <div className="controls-container">
           <div className="control">
             <button type="button"
-              className="btn btn-primary"
+              className="btn btn-light"
               onClick={this.handlePausePlayGame}>
               {this.state.isPaused ? 'Play' : 'Pause'}
             </button>
@@ -232,6 +242,21 @@ class App extends React.Component {
             <input type="number"
               value={this.state.cellSize}
               onChange={this.handleCellSizeChange}/>
+          </div>
+          <div className="control">
+            <p>Colors</p>
+            <div className="color-picker">
+              <input type="color" 
+                className="form-control form-control-color" 
+                onChange={this.handleOffColorChange}
+                value={this.state.offColor}
+                title="Choose your color"/>
+              <input type="color" 
+                className="form-control form-control-color"
+                onChange={this.handleOnColorChange}
+                value={this.state.onColor}
+                title="Choose your color"/>
+            </div>
           </div>
           <div className="control">
             <p>Counter</p>
