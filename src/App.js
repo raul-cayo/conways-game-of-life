@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Grid from './components/Grid';
+import PlantImage from './images/plant.png';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class App extends React.Component {
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0]
       ],
-      onColor: '#000000',
-      offColor: '#ffffff',
+      onColor: '#84BA63',
+      offColor: '#404040',
       cellSize: 30,
       currentTimer: null,
       isPaused: false
@@ -143,7 +144,7 @@ class App extends React.Component {
       }
     }
 
-    if (yDiff > 0) {// newY > prevY
+    if (yDiff > 0) { // newY > prevY
       const halfDiff = Math.floor(yDiff / 2);
       const newRow = [];
       for (let i = 0; i < newGridSize.y; i++) {
@@ -158,7 +159,7 @@ class App extends React.Component {
       }
     }
 
-    if (yDiff < 0) {// newY < prevY
+    if (yDiff < 0) { // newY < prevY
       const halfDiff = Math.floor(Math.abs(yDiff) / 2);
       for (let i = 0; i < halfDiff; i++) {
         prevGenerationAdj.shift();
@@ -224,6 +225,9 @@ class App extends React.Component {
             cellClickHandler={this.handleCellClick}/>
         </div>
         <div className="controls-container">
+          <div className="control">
+          <img alt="plant" src={PlantImage} className="logo" />
+          </div>
           <div className="control">
             <button type="button"
               className="btn btn-light"
