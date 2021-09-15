@@ -262,13 +262,14 @@ class App extends React.Component {
                   title="Choose your color"/>
               </div>
             </div>
+          </div>
+          <div style={{display: 'flex'}}>
             <div className="control">
-              <label>Counter</label>
               <p>{this.state.counter}</p>
             </div>
-          </div>
-          <div className="logo">
-            <img alt="plant" src={PlantImage}/>
+            <div className="logo">
+              <img alt="plant" src={PlantImage}/>
+            </div>
           </div>
         </div>
       </div>

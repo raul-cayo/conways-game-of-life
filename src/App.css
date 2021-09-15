@@ -35,6 +35,10 @@
   text-align: center;
 }
 
+.control p {
+  margin: 8px 0 0 0;
+}
+
 .logo {
   display: flex;
   flex-direction: column;
