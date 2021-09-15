@@ -225,48 +225,50 @@ class App extends React.Component {
             cellClickHandler={this.handleCellClick}/>
         </div>
         <div className="controls-container">
-          <div className="control">
-          <img alt="plant" src={PlantImage} className="logo" />
-          </div>
-          <div className="control">
-            <button type="button"
-              className="btn pause-play-btn"
-              onClick={this.handlePausePlayGame}>
-              {this.state.isPaused ? 'Play' : 'Pause'}
-            </button>
-          </div>
-          <div className="control">
-            <label>Speed</label>
-            <input type="number"
-              className="number-input"
-              value={this.state.speed}
-              onChange={this.handleSpeedChange}/>
-          </div>
-          <div className="control">
-            <label>Cell Size</label>
-            <input type="number"
-              className="number-input"
-              value={this.state.cellSize}
-              onChange={this.handleCellSizeChange}/>
-          </div>
-          <div className="control">
-            <label>Colors</label>
-            <div className="color-picker">
-              <input type="color" 
-                className="form-control form-control-color" 
-                onChange={this.handleOffColorChange}
-                value={this.state.offColor}
-                title="Choose your color"/>
-              <input type="color" 
-                className="form-control form-control-color"
-                onChange={this.handleOnColorChange}
-                value={this.state.onColor}
-                title="Choose your color"/>
+          <div className="controls">
+            <div className="control pause-play-control">
+              <button type="button"
+                className="btn pause-play-btn"
+                onClick={this.handlePausePlayGame}>
+                {this.state.isPaused ? 'Play' : 'Pause'}
+              </button>
+            </div>
+            <div className="control">
+              <label>Speed</label>
+              <input type="number"
+                className="number-input"
+                value={this.state.speed}
+                onChange={this.handleSpeedChange}/>
+            </div>
+            <div className="control">
+              <label>Cell Size</label>
+              <input type="number"
+                className="number-input"
+                value={this.state.cellSize}
+                onChange={this.handleCellSizeChange}/>
+            </div>
+            <div className="control">
+              <label>Colors</label>
+              <div className="color-picker">
+                <input type="color" 
+                  className="form-control form-control-color" 
+                  onChange={this.handleOffColorChange}
+                  value={this.state.offColor}
+                  title="Choose your color"/>
+                <input type="color" 
+                  className="form-control form-control-color"
+                  onChange={this.handleOnColorChange}
+                  value={this.state.onColor}
+                  title="Choose your color"/>
+              </div>
+            </div>
+            <div className="control">
+              <label>Counter</label>
+              <p>{this.state.counter}</p>
             </div>
           </div>
-          <div className="control">
-            <label>Counter</label>
-            <p>{this.state.counter}</p>
+          <div className="logo">
+            <img alt="plant" src={PlantImage}/>
           </div>
         </div>
       </div>
