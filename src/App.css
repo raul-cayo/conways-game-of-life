@@ -78,37 +78,37 @@ button:active {
 }
 
 .controls .control input[type='number'] {
-  line-height: 2;
-  padding-left: 9px;
   background: #404040;
+  border-radius: 4px;
   box-shadow: inset 4px 4px 4px #484848, 
               inset -4px -4px 4px #484848,
               6px 6px 10px 0 #000;
   border-style: none;
-  margin-bottom: 4px;
-  border-radius: 4px;
   color: #EEE;
+  margin-bottom: 4px;
+  line-height: 1.8;
+  padding-left: 9px;
   width: 90px;
 }
 .controls .control input[type='color'] {
   background: #333;
-  border: 0;
-  width: 26px;
-  height: 26px;
+  height: 38px;
+  margin: -6px 0 0 -6px;
   padding: 0;
+  width: 38px;
 }
 .controls .control .color-picker {
   background: #484848;
-  border-radius: 4px;
-  box-shadow: 6px 6px 10px 0 #000;
-  margin: 0 4px 4px 4px;
   border: 2px solid #484848;
-  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px 0 #000;
   height: 30px;
+  margin: 0 4px 4px 4px;
+  overflow: hidden;
+  width: 30px;
 }
 .controls .control .colors {
   display: flex;
-  flex-direction: row;
 }
 .about .counter p {
   margin-bottom: 0;
@@ -116,10 +116,10 @@ button:active {
   text-shadow: 4px 4px 3px #000;
 }
 .about .logo img {
-  height: 74px;
-  width: auto;
-  margin-bottom: 5px;
   filter: drop-shadow(6px 6px 2px #000);
+  height: 74px;
+  margin-bottom: 5px;
+  width: auto;
 }
 .about .logo img:hover {
   filter: drop-shadow(6px 6px 0px #000);
