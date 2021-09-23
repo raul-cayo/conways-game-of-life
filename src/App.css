@@ -91,6 +91,11 @@ button:active {
   width: 90px;
   -moz-appearance: textfield;
 }
+.controls .control input[type='number']:hover {
+  box-shadow: 4px 4px 4px 2px #000,
+              inset 4px 4px 8px #00000030, 
+              inset -4px -4px 8px #FFFFFF10;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -112,6 +117,9 @@ input::-webkit-inner-spin-button {
   margin: 0 4px 4px 4px;
   overflow: hidden;
   width: 30px;
+}
+.controls .control .color-picker:hover {
+  box-shadow: 4px 4px 4px 2px #000;
 }
 .controls .control .colors {
   display: flex;
