@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import Grid from './components/Grid';
+import './App.css';
 import PlantImage from './images/plant.png';
 
 class App extends React.Component {
@@ -24,7 +24,6 @@ class App extends React.Component {
     };
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
-    this.getNewGeneration = this.getNewGeneration.bind(this);
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleOffColorChange = this.handleOffColorChange.bind(this);
@@ -36,7 +35,7 @@ class App extends React.Component {
   // ----- Lyfecycle Methods ----- //
   componentDidMount() {
     const timerID = setTimeout(this.nextGenerationTicker, this.state.speed);
-    this.setState({currentTimer: timerID});
+    this.setState({ currentTimer: timerID });
   }
 
   componentWillUnmount() {
@@ -61,45 +60,18 @@ class App extends React.Component {
   getNewGeneration(prevGeneration) {
     const newGeneration = [];
     const newGridSize = this.getNewGridSize(this.state.cellSize);
-    const prevGenerationAdj = this.getPrevGenerationAdj(prevGeneration, newGridSize);
+    const adjustedPrevGeneration = this.getAdjustedGenerationSize(prevGeneration, newGridSize);
 
-    for (let y = 0; y < newGridSize.y; y++) {
+    for (let row = 0; row < newGridSize.rows; row++) {
       newGeneration.push([]);
-      for(let x = 0; x < newGridSize.x; x++) {
-        // Counting neighbors
-        let neighbors = 0;
-        if (y > 0) {
-          neighbors += prevGenerationAdj[y - 1][x];
-          if (x < newGridSize.x - 1) {
-            neighbors += prevGenerationAdj[y - 1][x + 1];
-          }
-          if (x > 0) {
-            neighbors += prevGenerationAdj[y - 1][x - 1];
-          }
-        }
-        if (y < newGridSize.y - 1) {
-          neighbors += prevGenerationAdj[y + 1][x];
-          if (x < newGridSize.x - 1) {
-            neighbors += prevGenerationAdj[y + 1][x + 1];
-          }
-          if (x > 0) {
-            neighbors += prevGenerationAdj[y + 1][x - 1];
-          }
-        }
-        if (x > 0) {
-          neighbors += prevGenerationAdj[y][x - 1];
-        }
-        if (x < newGridSize.x - 1) {
-          neighbors += prevGenerationAdj[y][x + 1];
-        }
-
-        // Creating new generation
+      for (let column = 0; column < newGridSize.columns; column++) {
+        const neighbors = this.countNeighbors(adjustedPrevGeneration, row, column);
         if (neighbors === 3) {
-          newGeneration[y][x] = 1;
-        } else if (prevGenerationAdj[y][x] && (neighbors === 2 || neighbors === 3)) {
-          newGeneration[y][x] = 1;
+          newGeneration[row][column] = 1;
+        } else if (adjustedPrevGeneration[row][column] && neighbors === 2) {
+          newGeneration[row][column] = 1;
         } else {
-          newGeneration[y][x] = 0;
+          newGeneration[row][column] = 0;
         }
       }
     }
@@ -108,88 +80,116 @@ class App extends React.Component {
 
   getNewGridSize(cellSize) {
     return {
-      x: Math.floor(window.innerWidth / cellSize),
-      y: Math.floor((window.innerHeight - 101) / cellSize)
+      columns: Math.floor(window.innerWidth / cellSize),
+      rows: Math.floor((window.innerHeight - 101) / cellSize)
     };
   }
 
-  getPrevGenerationAdj(prevGeneration, newGridSize) {
-    const yDiff = newGridSize.y - prevGeneration.length;
-    const xDiff = newGridSize.x - prevGeneration[0].length;
-    const prevGenerationAdj = [...prevGeneration];
+  getAdjustedGenerationSize(prevGeneration, newGridSize) {
+    const rowsDiff = newGridSize.rows - prevGeneration.length;
+    const columnsDiff = newGridSize.columns - prevGeneration[0].length;
+    const adjustedPrevGeneration = [...prevGeneration];
 
-    if (xDiff > 0) { // newX > prevX
-      const halfDiff = Math.floor(xDiff / 2);
-      for (let i = 0; i < prevGeneration.length; i++) {
-        for (let j = 0; j < halfDiff; j++) {
-          prevGenerationAdj[i].unshift(0);
-          prevGenerationAdj[i].push(0);
+    if (columnsDiff > 0) { // newColumnsLength > prevColumnsLength
+      const halfDiff = Math.floor(columnsDiff / 2);
+      for (let row = 0; row < prevGeneration.length; row++) {
+        for (let i = 0; i < halfDiff; i++) {
+          adjustedPrevGeneration[row].unshift(0);
+          adjustedPrevGeneration[row].push(0);
         }
-        if (xDiff % 2) { // Odd
-          prevGenerationAdj[i].push(0);
+        if (columnsDiff % 2) {
+          adjustedPrevGeneration[row].push(0);
         }
       }
     }
-    
-    if (xDiff < 0) { // newX < prevX
-      const halfDiff = Math.floor(Math.abs(xDiff) / 2);
-      for (let i = 0; i < prevGeneration.length; i++) {
-        for (let j = 0; j < halfDiff; j++) {
-          prevGenerationAdj[i].shift();
-          prevGenerationAdj[i].pop();
+    if (columnsDiff < 0) { // newColumnsLength < prevColumnsLength
+      const halfDiff = Math.floor(Math.abs(columnsDiff) / 2);
+      for (let row = 0; row < prevGeneration.length; row++) {
+        for (let i = 0; i < halfDiff; i++) {
+          adjustedPrevGeneration[row].shift();
+          adjustedPrevGeneration[row].pop();
         }
-        if (Math.abs(xDiff) % 2) { // Odd
-          prevGenerationAdj[i].pop();
+        if (Math.abs(columnsDiff) % 2) {
+          adjustedPrevGeneration[row].pop();
         }
       }
     }
-
-    if (yDiff > 0) { // newY > prevY
-      const halfDiff = Math.floor(yDiff / 2);
+    if (rowsDiff > 0) { // newRowsLength > prevRowsLength
+      const halfDiff = Math.floor(rowsDiff / 2);
       const newRow = [];
-      for (let i = 0; i < newGridSize.y; i++) {
+      for (let row = 0; row < newGridSize.rows; row++) {
         newRow.push(0);
       }
-      for (let i = 0; i < halfDiff; i++) {
-        prevGenerationAdj.unshift(newRow);
-        prevGenerationAdj.push(newRow);
+      for (let row = 0; row < halfDiff; row++) {
+        adjustedPrevGeneration.unshift(newRow);
+        adjustedPrevGeneration.push(newRow);
       }
-      if (yDiff % 2) { // Odd
-        prevGenerationAdj.push(newRow);
-      }
-    }
-
-    if (yDiff < 0) { // newY < prevY
-      const halfDiff = Math.floor(Math.abs(yDiff) / 2);
-      for (let i = 0; i < halfDiff; i++) {
-        prevGenerationAdj.shift();
-        prevGenerationAdj.pop();
-      }
-      if (Math.abs(yDiff) % 2) { // Odd
-        prevGenerationAdj.pop();
+      if (rowsDiff % 2) {
+        adjustedPrevGeneration.push(newRow);
       }
     }
-    return prevGenerationAdj;
+    if (rowsDiff < 0) { // newRowsLength < prevRowsLength
+      const halfDiff = Math.floor(Math.abs(rowsDiff) / 2);
+      for (let row = 0; row < halfDiff; row++) {
+        adjustedPrevGeneration.shift();
+        adjustedPrevGeneration.pop();
+      }
+      if (Math.abs(rowsDiff) % 2) {
+        adjustedPrevGeneration.pop();
+      }
+    }
+    return adjustedPrevGeneration;
   }
 
-  // Handlers
+  countNeighbors(generation, row, column) {
+    const rowsLength = generation.length;
+    const columnsLength = generation[0].length;
+    let neighbors = 0;
+    if (row > 0) {
+      neighbors += generation[row - 1][column];
+      if (column < columnsLength - 1) {
+        neighbors += generation[row - 1][column + 1];
+      }
+      if (column > 0) {
+        neighbors += generation[row - 1][column - 1];
+      }
+    }
+    if (row < rowsLength - 1) {
+      neighbors += generation[row + 1][column];
+      if (column < columnsLength - 1) {
+        neighbors += generation[row + 1][column + 1];
+      }
+      if (column > 0) {
+        neighbors += generation[row + 1][column - 1];
+      }
+    }
+    if (column > 0) {
+      neighbors += generation[row][column - 1];
+    }
+    if (column < columnsLength - 1) {
+      neighbors += generation[row][column + 1];
+    }
+    return neighbors;
+  }
+  
+  // ----- Handlers ----- //
   handleSpeedChange(e) {
-    this.setState({speed: e.target.value});
+    this.setState({ speed: e.target.value });
   }
 
   handleCellSizeChange(e) {
-    this.setState({cellSize: e.target.value});
+    this.setState({ cellSize: e.target.value });
   }
 
   handleOffColorChange(e) {
-    this.setState({offColor: e.target.value});
+    this.setState({ offColor: e.target.value });
   }
 
   handleOnColorChange(e) {
-    this.setState({onColor: e.target.value});
+    this.setState({ onColor: e.target.value });
   }
 
-  handlePausePlayGame(e) {
+  handlePausePlayGame() {
     if (this.state.isPaused) {
       this.nextGenerationTicker();
     } else {
@@ -201,14 +201,14 @@ class App extends React.Component {
     }
   }
 
-  handleCellClick(xIndex, yIndex) {
+  handleCellClick(row, column) {
     this.setState((prevState) => {
       const newGeneration = [];
-      for (let row of prevState.generation) {
+      for (const row of prevState.generation) {
         newGeneration.push([...row]);
       }
-      const newCellState = prevState.generation[yIndex][xIndex] ? 0 : 1;
-      newGeneration[yIndex][xIndex] = newCellState;
+      const newCellState = prevState.generation[row][column] ? 0 : 1;
+      newGeneration[row][column] = newCellState;
       return {generation: newGeneration};
     });
   }
@@ -250,8 +250,8 @@ class App extends React.Component {
             <div className="control">
               <label>Colors</label>
               <div className="color-picker">
-                <input type="color" 
-                  className="form-control form-control-color" 
+                <input type="color"
+                  className="form-control form-control-color"
                   onChange={this.handleOffColorChange}
                   value={this.state.offColor}
                   title="Choose your color"/>
@@ -263,7 +263,7 @@ class App extends React.Component {
               </div>
             </div>
           </div>
-          <div style={{display: 'flex'}}>
+          <div style={{ display: 'flex' }}>
             <div className="control">
               <p>{this.state.counter}</p>
             </div>
