@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from './components/Grid';
+import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import './reset.css';
 import './App.css';
 import PlantImage from './images/plant.png';
@@ -10,13 +11,7 @@ class App extends React.Component {
     this.state = {
       counter: 0,
       speed: 1000,
-      generation: [
-        [0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0]
-      ],
+      generation: getLexiconByName("Kok's galaxy").grid,
       onColor: '#40BB6C',
       offColor: '#404040',
       cellSize: 30,
@@ -29,6 +24,7 @@ class App extends React.Component {
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleOffColorChange = this.handleOffColorChange.bind(this);
     this.handleOnColorChange = this.handleOnColorChange.bind(this);
+    this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
   }
@@ -40,7 +36,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.state.timerID);
+    clearTimeout(this.state.currentTimer);
   }
 
   // ----- App Methods ----- //
@@ -89,7 +85,10 @@ class App extends React.Component {
   getAdjustedGenerationSize(prevGeneration, newGridSize) {
     const rowsDiff = newGridSize.rows - prevGeneration.length;
     const columnsDiff = newGridSize.columns - prevGeneration[0].length;
-    const adjustedPrevGeneration = [...prevGeneration];
+    const adjustedPrevGeneration = [];
+    for (const row of prevGeneration) {
+      adjustedPrevGeneration.push([...row]);
+    }
 
     if (columnsDiff > 0) { // newColumnsLength > prevColumnsLength
       const halfDiff = Math.floor(columnsDiff / 2);
@@ -190,14 +189,21 @@ class App extends React.Component {
     this.setState({ onColor: e.target.value });
   }
 
+  handleRandomLexicon() {
+    const term = getRandomLexiconExample();
+    this.setState({ generation: term.grid });
+  }
+
   handlePausePlayGame() {
     if (this.state.isPaused) {
       this.nextGenerationTicker();
     } else {
-      clearTimeout(this.state.currentTimer);
-      this.setState({
+      this.setState((prevState) => {
+        clearTimeout(prevState.currentTimer);
+        return {
           isPaused: true,
           currentTimer: null
+        };
       });
     }
   }
@@ -206,11 +212,11 @@ class App extends React.Component {
     this.setState((prevState) => {
       const newGeneration = [];
       for (const row of prevState.generation) {
-        newGeneration.push([...row]);
+        newGeneration.push([[...row]]);
       }
       const newCellState = prevState.generation[row][column] ? 0 : 1;
       newGeneration[row][column] = newCellState;
-      return {generation: newGeneration};
+      return { generation: newGeneration };
     });
   }
 
@@ -228,7 +234,11 @@ class App extends React.Component {
         <div className="controls-container">
           <div className="controls">
             <div className="control">
-              <button type="button" className="random-btn">RANDOM</button>
+              <button type="button"
+                className="random-btn"
+                onClick={this.handleRandomLexicon}>
+                RANDOM
+              </button>
             </div>
             <div className="control">
               <button type="button"
