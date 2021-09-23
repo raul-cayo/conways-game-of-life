@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from './components/Grid';
+import './reset.css';
 import './App.css';
 import PlantImage from './images/plant.png';
 
@@ -16,7 +17,7 @@ class App extends React.Component {
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0]
       ],
-      onColor: '#61A84D',
+      onColor: '#40BB6C',
       offColor: '#404040',
       cellSize: 30,
       currentTimer: null,
@@ -226,46 +227,55 @@ class App extends React.Component {
         </div>
         <div className="controls-container">
           <div className="controls">
-            <div className="control pause-play-control">
+            <div className="control">
+              <button type="button" className="random-btn">RANDOM</button>
+            </div>
+            <div className="control">
               <button type="button"
-                className="btn pause-play-btn"
                 onClick={this.handlePausePlayGame}>
-                {this.state.isPaused ? 'Play' : 'Pause'}
+                { this.state.isPaused ? 
+                  <span className="material-icons">play_arrow</span> : 
+                  <span className="material-icons">pause</span> }
               </button>
             </div>
             <div className="control">
-              <label>Speed</label>
+              <label>SPEED</label>
               <input type="number"
-                className="number-input"
                 value={this.state.speed}
-                onChange={this.handleSpeedChange}/>
+                onChange={this.handleSpeedChange}/>    
             </div>
             <div className="control">
-              <label>Cell Size</label>
+              <label>CELL SIZE</label>
               <input type="number"
-                className="number-input"
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
             <div className="control">
-              <label>Colors</label>
-              <div className="color-picker">
-                <input type="color"
-                  className="form-control form-control-color"
-                  onChange={this.handleOffColorChange}
-                  value={this.state.offColor}
-                  title="Choose your color"/>
-                <input type="color" 
-                  className="form-control form-control-color"
-                  onChange={this.handleOnColorChange}
-                  value={this.state.onColor}
-                  title="Choose your color"/>
+              <label>COLORS</label>
+              <div className="colors">
+                <div className="color-picker">
+                  <input type="color"
+                    onChange={this.handleOffColorChange}
+                    value={this.state.offColor}
+                    title="Choose your OFF color"/>
+                </div>
+                <div className="color-picker">
+                  <input type="color" 
+                    onChange={this.handleOnColorChange}
+                    value={this.state.onColor}
+                    title="Choose your ON color"/>
+                </div>
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex' }}>
-            <div className="control">
+          <div className="about">
+            <div className="counter">
               <p>{this.state.counter}</p>
+            </div>
+            <div className="info">
+              <button type="button">
+                <span className="material-icons">info_outlined</span>
+              </button>
             </div>
             <div className="logo">
               <img alt="plant" src={PlantImage}/>

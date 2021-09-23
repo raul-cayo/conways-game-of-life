@@ -1,95 +1,109 @@
 .app-container {
-  background-color: #242424;
+  background: #242424;
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
   min-height: 100vh;
 }
-
 .grid-container {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
 }
-
 .controls-container {
-  color: white;
+  color: #EEE;
   display: flex;
   height: 100px;
   justify-content: space-between;
-  padding: 0 16px 6px 20px;
+  padding: 0 12px 4px 22px;
 }
-
-.controls {
-  background-color: transparent;
-  color: white;
+.controls,
+.about {
+  color: #EEE;
   display: flex;
-  height: 100%;
   justify-content: space-evenly;
 }
-
-.control {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 22px 10px 0;
-  text-align: center;
-}
-
-.control p {
-  margin: 8px 0 0 0;
-}
-
+.control,
+.counter,
+.info,
 .logo {
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px;
   justify-content: center;
+  margin: 0 10px;
   text-align: center;
 }
-
-.logo img {
-  height: 74px;
+button {
+  background: #404040;
+  border-radius: 4px;
+  border-style: none;
+  box-shadow: 6px 6px 10px 0 #000;
+  color: #EEE;
+  height: 50px;
+  line-height: 1;
+  padding: 10px;
+  width: 50px;
+}
+.controls .control:nth-child(3) {
+  margin-left: 40px;
+}
+.controls .control label {
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+.controls .control .random-btn {
+  background: rgb(64,187,108);
+  background: linear-gradient(240deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
+  color: #111;
+  font-weight: bold;
+  letter-spacing: 0.5px;
   width: auto;
 }
-
-.pause-play-control {
-  margin-bottom: 0;
-}
-
-.pause-play-btn {
-  background-color: #61A84D;
-  box-shadow: 6px 6px 21px #444, -6px -6px 21px #777;
-  color: white;
-  font-weight: bold;
-  width: 70px;
-  height: 50px;
-  border-radius: 5px;
-}
-
-.number-input {
-  /* background-color: #404040; */
+.controls .control input[type='number'] {
   line-height: 2;
   padding-left: 9px;
-  background: linear-gradient(145deg, #1F1F1F, #292929);
-  box-shadow: inset 4px 4px 4px #1c1c1c, inset -4px -4px 4px #2c2c2c;
-  border: 1px solid #333;
-  border-radius: 5px;
-  color: white;
-  width: 100px;
+  background: #404040;
+  box-shadow: inset 4px 4px 4px #484848, 
+              inset -4px -4px 4px #484848,
+              6px 6px 10px 0 #000;
+  border-style: none;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  color: #EEE;
+  width: 90px;
 }
-
-.form-control-color {
-  background-color: #333;
-  border: 1px solid #333;
-  width: 30px;
-  margin: 0 8px;
+.controls .control input[type='color'] {
+  background: #333;
+  border: 0;
+  width: 26px;
+  height: 26px;
   padding: 0;
 }
-
-.color-picker {
+.controls .control .color-picker {
+  background: #484848;
+  border-radius: 4px;
+  box-shadow: 6px 6px 10px 0 #000;
+  margin: 0 4px 4px 4px;
+  border: 2px solid #484848;
+  overflow: hidden;
+  height: 30px;
+}
+.controls .control .colors {
   display: flex;
   flex-direction: row;
-  margin-top: 6px;
+}
+.about .counter p {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.about .info span {
+  width: 24px;
+}
+.about .logo img {
+  height: 74px;
+  width: auto;
+  margin-bottom: 5px;
+  filter: drop-shadow(6px 6px 2px #000);
 }
 
 /* Grid.js */
@@ -98,7 +112,6 @@
   flex-direction: column;
   justify-content: center;
 }
-
 .grid-row {
   display: flex;
 }
