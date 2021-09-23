@@ -191,7 +191,10 @@ class App extends React.Component {
 
   handleRandomLexicon() {
     const term = getRandomLexiconExample();
-    this.setState({ generation: term.grid });
+    this.setState({ 
+      generation: term.grid,
+      counter: 0
+    });
   }
 
   handlePausePlayGame() {
