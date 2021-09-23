@@ -274,7 +274,7 @@ class App extends React.Component {
             </div>
             <div className="info">
               <button type="button">
-                <span className="material-icons">info_outlined</span>
+                <span className="material-icons">info</span>
               </button>
             </div>
             <div className="logo">
