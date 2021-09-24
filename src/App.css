@@ -79,31 +79,6 @@ button:active {
   background: rgb(150,201,61);
   background: linear-gradient(60deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
 }
-
-.controls .control input[type='number'] {
-  background: #404040;
-  border-radius: 4px;
-  box-shadow: 4px 4px 8px #000,
-              inset 4px 4px 8px #00000030, 
-              inset -4px -4px 8px #FFFFFF10;
-  border-style: none;
-  color: #EEE;
-  margin-bottom: 4px;
-  line-height: 1.8;
-  text-align: center;
-  width: 90px;
-  -moz-appearance: textfield;
-}
-.controls .control input[type='number']:hover {
-  box-shadow: 4px 4px 4px 2px #000,
-              inset 4px 4px 8px #00000030, 
-              inset -4px -4px 8px #FFFFFF10;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 .controls .control input[type='color'] {
   background: #333;
   height: 38px;
@@ -146,6 +121,7 @@ input::-webkit-inner-spin-button {
   filter: drop-shadow(3px 3px 0px #000);
 }
 
+/* Plant logo animation */
 @keyframes rotate360 {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
@@ -155,14 +131,4 @@ input::-webkit-inner-spin-button {
   animation-name: rotate360;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
-}
-
-/* Grid.js */
-.grid {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.grid-row {
-  display: flex;
 }

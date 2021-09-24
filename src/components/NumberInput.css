@@ -2,3 +2,27 @@
   display: flex;
   flex-direction: column;
 }
+.number-input-container input[type='number'] {
+  background: #404040;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #000,
+              inset 4px 4px 8px #00000030, 
+              inset -4px -4px 8px #FFFFFF10;
+  border-style: none;
+  color: #EEE;
+  margin-bottom: 4px;
+  line-height: 1.8;
+  text-align: center;
+  min-width: 90px;
+  -moz-appearance: textfield;
+}
+.number-input-container input[type='number']:hover {
+  box-shadow: 4px 4px 4px 2px #000,
+              inset 4px 4px 8px #00000030, 
+              inset -4px -4px 8px #FFFFFF10;
+}
+.number-input-container input::-webkit-outer-spin-button,
+.number-input-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
