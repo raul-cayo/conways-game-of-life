@@ -1,11 +1,11 @@
 import React from 'react';
 import Grid from './components/Grid';
-//import NumberInput from './components/NumberInput';
+import NumberInput from './components/NumberInput';
+import ColorPicker from './components/ColorPicker';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import './reset.css';
 import './App.css';
 import PlantImage from './images/plant.png';
-import NumberInput from './components/NumberInput';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,8 +14,6 @@ class App extends React.Component {
       counter: 0,
       tempo: 1000,
       generation: getLexiconByName("Kok's galaxy").grid,
-      onColor: '#40BB6C',
-      offColor: '#404040',
       cellSize: 30,
       currentTimer: null,
       isPaused: false
@@ -24,8 +22,6 @@ class App extends React.Component {
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.handleTempoChange = this.handleTempoChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
-    this.handleOffColorChange = this.handleOffColorChange.bind(this);
-    this.handleOnColorChange = this.handleOnColorChange.bind(this);
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
@@ -184,14 +180,6 @@ class App extends React.Component {
     this.setState({ cellSize: newSize });
   }
 
-  handleOffColorChange(e) {
-    this.setState({ offColor: e.target.value });
-  }
-
-  handleOnColorChange(e) {
-    this.setState({ onColor: e.target.value });
-  }
-
   handleRandomLexicon() {
     const term = getRandomLexiconExample();
     this.setState({ 
@@ -239,9 +227,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="grid-container">
-          <Grid generation={this.state.generation} 
-            onColor={this.state.onColor}
-            offColor={this.state.offColor}
+          <Grid generation={this.state.generation}
             cellSize={this.state.cellSize}
             cellClickHandler={this.handleCellClick}/>
         </div>
@@ -263,32 +249,28 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
-              <NumberInput label={'TEMPO'}
-                units={'ms'} min={100} max={3000}
+              <NumberInput label="TEMPO"
+                units="ms" min={100} max={3000}
                 value={this.state.tempo}
                 onChange={this.handleTempoChange}/> 
             </div>
             <div className="control">
-              <NumberInput label={'CELL SIZE'}
-                units={'px'} min={20} max={50}
+              <NumberInput label="CELL SIZE"
+                units="px" min={20} max={50}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
             <div className="control">
               <label>COLORS</label>
               <div className="colors">
-                <div className="color-picker">
-                  <input type="color"
-                    onChange={this.handleOffColorChange}
-                    value={this.state.offColor}
-                    title="Choose your OFF color"/>
-                </div>
-                <div className="color-picker">
-                  <input type="color" 
-                    onChange={this.handleOnColorChange}
-                    value={this.state.onColor}
-                    title="Choose your ON color"/>
-                </div>
+                <ColorPicker 
+                  color="#404040"
+                  cssVar="--cell-off"
+                  title="Choose your OFF color"/>
+                <ColorPicker 
+                  color="#40BB6C"
+                  cssVar="--cell-on"
+                  title="Choose your ON color"/>
               </div>
             </div>
           </div>

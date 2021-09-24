@@ -1,3 +1,13 @@
+:root {
+  --cell-off: #404040;
+  --cell-on: #40BB6C;
+}
+.cell-on {
+  background: var(--cell-on);
+}
+.cell-off {
+  background: var(--cell-off);
+}
 .app-container {
   background: #242424;
   display: flex;
@@ -79,26 +89,6 @@ button:active {
   background: rgb(150,201,61);
   background: linear-gradient(60deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
 }
-.controls .control input[type='color'] {
-  background: #333;
-  height: 38px;
-  margin: -6px 0 0 -6px;
-  padding: 0;
-  width: 38px;
-}
-.controls .control .color-picker {
-  background: #484848;
-  border: 2px solid #484848;
-  border-radius: 4px;
-  box-shadow: 4px 4px 8px 0 #000;
-  height: 30px;
-  margin: 0 4px 4px 4px;
-  overflow: hidden;
-  width: 30px;
-}
-.controls .control .color-picker:hover {
-  box-shadow: 4px 4px 4px 2px #000;
-}
 .controls .control .colors {
   display: flex;
 }
@@ -126,7 +116,6 @@ button:active {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
 }
-
 .swirly-plant {
   animation-name: rotate360;
   animation-duration: 1.5s;
