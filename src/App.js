@@ -3,6 +3,7 @@ import Grid from './components/Grid';
 import NumberInput from './components/NumberInput';
 import ColorPicker from './components/ColorPicker';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
+import {showBaner} from './util/baners';
 import './reset.css';
 import './App.css';
 import PlantImage from './images/plant.png';
@@ -18,6 +19,8 @@ class App extends React.Component {
       currentTimer: null,
       isPaused: false
     };
+
+    showBaner("CONWAY'S GAME OF LIFE", 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.handleTempoChange = this.handleTempoChange.bind(this);
@@ -182,6 +185,7 @@ class App extends React.Component {
 
   handleRandomLexicon() {
     const term = getRandomLexiconExample();
+    showBaner(term.name, 2000);
     this.setState({ 
       generation: term.grid,
       counter: 0

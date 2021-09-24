@@ -1,3 +1,4 @@
+/* ----- Custom Properties ----- */
 :root {
   --cell-off: #404040;
   --cell-on: #40BB6C;
@@ -8,6 +9,8 @@
 .cell-off {
   background: var(--cell-off);
 }
+
+/* ----- Main Layout Containers ----- */
 .app-container {
   background: #242424;
   display: flex;
@@ -43,6 +46,8 @@
   margin: 0 10px;
   text-align: center;
 }
+
+/* ----- Buttons ----- */
 button {
   background: #404040;
   border-radius: 4px;
@@ -67,6 +72,8 @@ button:active {
               inset -4px -4px 8px #FFFFFF10;
   padding: 11px 9px 9px 11px;
 }
+
+/* ----- Controls ----- */
 .controls .control:nth-child(3) {
   margin-left: 40px;
 }
@@ -92,6 +99,8 @@ button:active {
 .controls .control .colors {
   display: flex;
 }
+
+/* ----- About Section ----- */
 .about .counter p {
   margin-bottom: 0;
   margin-right: 10px;
@@ -111,7 +120,21 @@ button:active {
   filter: drop-shadow(3px 3px 0px #000);
 }
 
-/* Plant logo animation */
+/* ----- Baner ----- */
+.baner {
+  background: #00000075;
+  border-radius: 4px;
+  color: #EEEEEE;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  left: 50%;
+  padding: 20px;
+  position: fixed;
+  top: 100px;
+  transform: translateX(-50%);
+}
+
+/* ----- Animations ----- */
 @keyframes rotate360 {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
@@ -120,4 +143,15 @@ button:active {
   animation-name: rotate360;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
+}
+
+@keyframes fade-out {
+	0% { opacity: 1 }
+	100% { opacity: 0 }
+}
+.fade-out {
+  animation-name: fade-out;
+  animation-duration: 2.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
