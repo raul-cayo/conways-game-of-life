@@ -1,9 +1,11 @@
 import React from 'react';
 import Grid from './components/Grid';
+//import NumberInput from './components/NumberInput';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import './reset.css';
 import './App.css';
 import PlantImage from './images/plant.png';
+import NumberInput from './components/NumberInput';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class App extends React.Component {
     };
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
-    this.handleSpeedChange = this.handleSpeedChange.bind(this);
+    this.handleTempoChange = this.handleTempoChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleOffColorChange = this.handleOffColorChange.bind(this);
     this.handleOnColorChange = this.handleOnColorChange.bind(this);
@@ -174,12 +176,12 @@ class App extends React.Component {
   }
   
   // ----- Handlers ----- //
-  handleSpeedChange(e) {
-    this.setState({ tempo: e.target.value });
+  handleTempoChange(newTempo) {
+    this.setState({ tempo: newTempo });
   }
 
-  handleCellSizeChange(e) {
-    this.setState({ cellSize: e.target.value });
+  handleCellSizeChange(newSize) {
+    this.setState({ cellSize: newSize });
   }
 
   handleOffColorChange(e) {
@@ -261,14 +263,14 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
-              <label>TEMPO <span>(ms)</span></label>
-              <input type="number"
+              <NumberInput label={'TEMPO'}
+                units={'ms'} min={100} max={3000}
                 value={this.state.tempo}
-                onChange={this.handleSpeedChange}/>    
+                onChange={this.handleTempoChange}/> 
             </div>
             <div className="control">
-              <label>CELL SIZE <span>(px)</span></label>
-              <input type="number"
+              <NumberInput label={'CELL SIZE'}
+                units={'px'} min={20} max={50}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
