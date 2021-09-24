@@ -64,6 +64,9 @@ button:active {
   margin-bottom: 2px;
   font-size: 14px;
 }
+.controls .control label span {
+  font-size: 12px;
+}
 .controls .control .random-btn {
   background: rgb(64,187,108);
   background: linear-gradient(240deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);

@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       counter: 0,
-      speed: 1000,
+      tempo: 1000,
       generation: getLexiconByName("Kok's galaxy").grid,
       onColor: '#40BB6C',
       offColor: '#404040',
@@ -31,7 +31,7 @@ class App extends React.Component {
 
   // ----- Lyfecycle Methods ----- //
   componentDidMount() {
-    const timerID = setTimeout(this.nextGenerationTicker, this.state.speed);
+    const timerID = setTimeout(this.nextGenerationTicker, this.state.tempo);
     this.setState({ currentTimer: timerID });
   }
 
@@ -41,12 +41,12 @@ class App extends React.Component {
 
   // ----- App Methods ----- //
   nextGenerationTicker() {
-    const timerID = setTimeout(this.nextGenerationTicker, this.state.speed);
+    const timerID = setTimeout(this.nextGenerationTicker, this.state.tempo);
     this.setState((prevState) => {
       const newGeneration = this.getNewGeneration(prevState.generation);
       return {
         counter: prevState.counter + 1,
-        speed: prevState.speed,
+        tempo: prevState.tempo,
         currentTimer: timerID,
         generation: newGeneration,
         isPaused: false
@@ -174,7 +174,7 @@ class App extends React.Component {
   
   // ----- Handlers ----- //
   handleSpeedChange(e) {
-    this.setState({ speed: e.target.value });
+    this.setState({ tempo: e.target.value });
   }
 
   handleCellSizeChange(e) {
@@ -252,13 +252,13 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
-              <label>SPEED</label>
+              <label>TEMPO <span>(ms)</span></label>
               <input type="number"
-                value={this.state.speed}
+                value={this.state.tempo}
                 onChange={this.handleSpeedChange}/>    
             </div>
             <div className="control">
-              <label>CELL SIZE</label>
+              <label>CELL SIZE <span>(px)</span></label>
               <input type="number"
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
