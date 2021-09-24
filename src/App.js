@@ -215,7 +215,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       const newGeneration = [];
       for (const row of prevState.generation) {
-        newGeneration.push([[...row]]);
+        newGeneration.push([...row]);
       }
       const newCellState = prevState.generation[row][column] ? 0 : 1;
       newGeneration[row][column] = newCellState;
