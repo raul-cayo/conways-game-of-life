@@ -27,6 +27,7 @@ class App extends React.Component {
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
+    this.handlePlantClick = this.handlePlantClick.bind(this);
   }
 
   // ----- Lyfecycle Methods ----- //
@@ -223,6 +224,14 @@ class App extends React.Component {
     });
   }
 
+  handlePlantClick() {
+    const plant = document.querySelector('.about .logo img');
+    plant.classList.add('swirly-plant');
+    setTimeout(() => {
+      plant.classList.remove('swirly-plant');
+    }, 2000); // swirly-plant animation is 1.5s
+  }
+
   // ----- Render ----- //
   render() {
     return (
@@ -291,7 +300,7 @@ class App extends React.Component {
               </button>
             </div>
             <div className="logo">
-              <img alt="plant" src={PlantImage}/>
+              <img onClick={this.handlePlantClick} alt="plant" src={PlantImage}/>
             </div>
           </div>
         </div>
