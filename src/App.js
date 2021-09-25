@@ -28,6 +28,7 @@ class App extends React.Component {
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
+    this.handleCleanGrid = this.handleCleanGrid.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
     this.handlePlantClick = this.handlePlantClick.bind(this);
   }
@@ -207,6 +208,23 @@ class App extends React.Component {
     }
   }
 
+  handleCleanGrid() {
+    this.setState((prevState) => {
+      const rowsLength = prevState.generation.length;
+      const columnsLength = prevState.generation[0].length;
+      const newGeneration = [];
+      const newRow = [];
+
+      for (let i = 0; i < columnsLength; i++) {
+        newRow.push(0);
+      }
+      for (let i = 0; i < rowsLength; i++) {
+        newGeneration.push(newRow);
+      }
+      return { generation: newGeneration };
+    });
+  }
+
   handleCellClick(row, column) {
     this.setState((prevState) => {
       const newGeneration = [];
@@ -259,14 +277,20 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
+              <button type="button"
+                onClick={this.handleCleanGrid}>
+                <span className="material-icons">delete</span>
+              </button>
+            </div>
+            <div className="control">
               <NumberInput label="TEMPO"
-                units="ms" min={100} max={3000}
+                units="MS" min={100} max={3000}
                 value={this.state.tempo}
                 onChange={this.handleTempoChange}/> 
             </div>
             <div className="control">
               <NumberInput label="CELL SIZE"
-                units="px" min={16} max={50}
+                units="PX" min={16} max={50}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>

@@ -80,7 +80,7 @@ a:visited {
 } 
 
 /* ----- Controls ----- */
-.controls .control:nth-child(3) {
+.controls .control:nth-child(4) {
   margin-left: 40px;
 }
 .controls .control label {
@@ -88,7 +88,7 @@ a:visited {
   font-size: 14px;
 }
 .controls .control label span {
-  font-size: 12px;
+  font-size: 10px;
 }
 .controls .control .random-btn {
   background: rgb(64,187,108);
