@@ -3,6 +3,7 @@ import Grid from './components/Grid';
 import NumberInput from './components/NumberInput';
 import ColorPicker from './components/ColorPicker';
 import InfoModal from './components/InfoModal';
+import { withTranslation } from 'react-i18next';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import {showBaner} from './util/baners';
 import './reset.css';
@@ -21,14 +22,20 @@ class App extends React.Component {
       isPaused: false
     };
 
-    showBaner("CONWAY'S GAME OF LIFE", 3000);
+    const { t, i18n } = this.props;
+    const language = window.navigator.userLanguage || window.navigator.language;
+    if (language.startsWith('es')) {
+      i18n.changeLanguage('es');
+    }
+
+    showBaner(t('baners.game_of_life'), 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.handleTempoChange = this.handleTempoChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
-    this.handleCleanGrid = this.handleCleanGrid.bind(this);
+    this.handleClearGrid = this.handleClearGrid.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
     this.handlePlantClick = this.handlePlantClick.bind(this);
   }
@@ -208,7 +215,7 @@ class App extends React.Component {
     }
   }
 
-  handleCleanGrid() {
+  handleClearGrid() {
     this.setState((prevState) => {
       const rowsLength = prevState.generation.length;
       const columnsLength = prevState.generation[0].length;
@@ -243,6 +250,8 @@ class App extends React.Component {
   }
 
   handlePlantClick() {
+    const { t } = this.props;
+    showBaner(t('baners.nothing'), 1000);
     const plant = document.querySelector('.about .logo img');
     plant.classList.add('swirly-plant');
     setTimeout(() => {
@@ -252,6 +261,7 @@ class App extends React.Component {
 
   // ----- Render ----- //
   render() {
+    const { t } = this.props;
     return (
       <div className="app-container">
         <div className="grid-container">
@@ -264,12 +274,16 @@ class App extends React.Component {
             <div className="control">
               <button type="button"
                 className="random-btn"
+                title={t('controls.tooltips.random_btn')}
                 onClick={this.handleRandomLexicon}>
-                RANDOM
+                {t('controls.random')}
               </button>
             </div>
             <div className="control">
               <button type="button"
+                title={ this.state.isPaused ? 
+                  t('controls.tooltips.pause_btn') : 
+                  t('controls.tooltips.play_btn') }
                 onClick={this.handlePausePlayGame}>
                 { this.state.isPaused ? 
                   <span className="material-icons">play_arrow</span> : 
@@ -278,33 +292,34 @@ class App extends React.Component {
             </div>
             <div className="control">
               <button type="button"
-                onClick={this.handleCleanGrid}>
+                title={t('controls.tooltips.clear_btn')}
+                onClick={this.handleClearGrid}>
                 <span className="material-icons">delete</span>
               </button>
             </div>
             <div className="control">
-              <NumberInput label="TEMPO"
+              <NumberInput label={t('controls.tempo')}
                 units="MS" min={100} max={3000}
                 value={this.state.tempo}
                 onChange={this.handleTempoChange}/> 
             </div>
             <div className="control">
-              <NumberInput label="CELL SIZE"
+              <NumberInput label={t('controls.cell_size')}
                 units="PX" min={16} max={50}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
             <div className="control">
-              <label>COLORS</label>
+              <label>{t("controls.colors")}</label>
               <div className="colors">
                 <ColorPicker 
                   color="#404040"
                   cssVar="--cell-off"
-                  title="Choose your OFF color"/>
+                  title={t('controls.tooltips.off_color_picker')}/>
                 <ColorPicker 
                   color="#40BB6C"
                   cssVar="--cell-on"
-                  title="Choose your ON color"/>
+                  title={t('controls.tooltips.on_color_picker')}/>
               </div>
             </div>
           </div>
@@ -313,7 +328,9 @@ class App extends React.Component {
               <p>{this.state.counter}</p>
             </div>
             <div className="info">
-              <button type="button" onClick={this.handleInfoClick}>
+              <button type="button"
+                title={t('controls.tooltips.info_btn')}
+                onClick={this.handleInfoClick}>
                 <span className="material-icons">info</span>
               </button>
             </div>
@@ -329,4 +346,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withTranslation()(App);

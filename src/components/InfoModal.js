@@ -1,29 +1,31 @@
 import React from 'react';
 import Modal from './Modal';
+import { withTranslation } from 'react-i18next';
 
 class InfoModal extends React.Component {
   render() {
+    const { t } = this.props;
     return (
-      <Modal id="info-modal" title="What is Conway's Game of Life?">
-        <p>Conways Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. One interacts with the Game of Life by creating an initial state and observing how it evolves. It produces complex and interesting patterns following a few rules.</p>
+      <Modal id="info-modal" title={t("info.modal_title")}>
+        <p>{t('info.game_description')}</p>
         <br/>
-        <p>Rules:</p>
+        <p>{t('info.rules')}:</p>
         <ol>
-          <li>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</li>
-          <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
-          <li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
-          <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+          <li>{t('info.rule_1')}</li>
+          <li>{t('info.rule_2')}</li>
+          <li>{t('info.rule_3')}</li>
+          <li>{t('info.rule_4')}</li>
         </ol>
         <br/>
-        <p>Resources:</p>
+        <p>{t('info.resources')}:</p>
         <ul>
-          <li><a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank" rel="noreferrer">Wikipedia</a></li>
+          <li><a href={t('info.wikipedia_link')} target="_blank" rel="noreferrer">Wikipedia</a></li>
           <li><a href="https://bitstorm.org/gameoflife/lexicon/" target="_blank" rel="noreferrer">Lexicon</a></li>
-          <li><a href="https://www.youtube.com/watch?v=R9Plq-D1gEk" target="_blank" rel="noreferrer">Youtube Video</a></li>
+          <li><a href={t('info.youtube_link')} target="_blank" rel="noreferrer">Youtube</a></li>
         </ul>
       </Modal>
     );
   }
 }
 
-export default InfoModal;
+export default withTranslation()(InfoModal);

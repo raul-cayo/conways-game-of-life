@@ -30,7 +30,7 @@ class ColorPicker extends React.Component {
         <input type="color"
           onChange={this.handleColorChange}
           value={this.state.color}
-          title="Choose your OFF color"/> 
+          title={this.props.title}/> 
       </div>
     )
   }
