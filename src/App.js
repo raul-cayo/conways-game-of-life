@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from './components/Grid';
 import NumberInput from './components/NumberInput';
 import ColorPicker from './components/ColorPicker';
+import InfoModal from './components/InfoModal';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import {showBaner} from './util/baners';
 import './reset.css';
@@ -218,6 +219,11 @@ class App extends React.Component {
     });
   }
 
+  handleInfoClick() {
+    const infoModal = document.getElementById('info-modal');
+    infoModal.style.display = 'block';
+  }
+
   handlePlantClick() {
     const plant = document.querySelector('.about .logo img');
     plant.classList.add('swirly-plant');
@@ -283,7 +289,7 @@ class App extends React.Component {
               <p>{this.state.counter}</p>
             </div>
             <div className="info">
-              <button type="button">
+              <button type="button" onClick={this.handleInfoClick}>
                 <span className="material-icons">info</span>
               </button>
             </div>
@@ -292,6 +298,8 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        
+        <InfoModal/>
       </div>
     );
   }

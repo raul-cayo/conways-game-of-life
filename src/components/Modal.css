@@ -1,0 +1,40 @@
+.modal {
+  background: #242424;
+  border-radius: 4px;
+  color: #EEEEEE;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 50%;
+  margin-top: 200px;
+  padding: 20px;
+  transform: translateX(-50%);
+}
+.modal-background {
+  background: #FFFFFF20;
+  display: none;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.modal-head {
+  border-bottom: 2px solid #404040;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 10px 10px;
+}
+.modal-head h2,
+.modal-head span {
+  font-size: 36px;
+}
+.modal-head span {
+  color: #CCCCCC;
+}
+.modal-head span:hover {
+  color: #EEEEEE;
+  cursor:default;
+}
+.modal-content {
+  min-height: 200px;
+  padding: 20px;
+}
