@@ -119,10 +119,10 @@ class App extends React.Component {
     if (rowsDiff > 0) { // newRowsLength > prevRowsLength
       const halfDiff = Math.floor(rowsDiff / 2);
       const newRow = [];
-      for (let row = 0; row < newGridSize.rows; row++) {
+      for (let i = 0; i < newGridSize.columns; i++) {
         newRow.push(0);
       }
-      for (let row = 0; row < halfDiff; row++) {
+      for (let i = 0; i < halfDiff; i++) {
         adjustedPrevGeneration.unshift(newRow);
         adjustedPrevGeneration.push(newRow);
       }
@@ -132,7 +132,7 @@ class App extends React.Component {
     }
     if (rowsDiff < 0) { // newRowsLength < prevRowsLength
       const halfDiff = Math.floor(Math.abs(rowsDiff) / 2);
-      for (let row = 0; row < halfDiff; row++) {
+      for (let i = 0; i < halfDiff; i++) {
         adjustedPrevGeneration.shift();
         adjustedPrevGeneration.pop();
       }
@@ -260,7 +260,7 @@ class App extends React.Component {
             </div>
             <div className="control">
               <NumberInput label="CELL SIZE"
-                units="px" min={20} max={50}
+                units="px" min={16} max={50}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
