@@ -56,7 +56,7 @@ const resources = {
         }
       },
       "baners": {
-        "game_of_life": "EL JUDEGO DE LA VIDA DE CONWAY",
+        "game_of_life": "EL JUEGO DE LA VIDA DE CONWAY",
         "nothing": "No hay nada aquí aún..."
       },
       "info": {

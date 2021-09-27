@@ -15,9 +15,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       counter: 0,
-      tempo: 1000,
+      tempo: 700,
       generation: getLexiconByName("Kok's galaxy").grid,
-      cellSize: 30,
+      cellSize: 22,
       currentTimer: null,
       isPaused: false
     };
@@ -299,13 +299,13 @@ class App extends React.Component {
             </div>
             <div className="control">
               <NumberInput label={t('controls.tempo')}
-                units="MS" min={100} max={3000}
+                units="MS" min={100} max={3000} step={50}
                 value={this.state.tempo}
                 onChange={this.handleTempoChange}/> 
             </div>
             <div className="control">
               <NumberInput label={t('controls.cell_size')}
-                units="PX" min={16} max={50}
+                units="PX" min={16} max={50} step={5}
                 value={this.state.cellSize}
                 onChange={this.handleCellSizeChange}/>
             </div>
