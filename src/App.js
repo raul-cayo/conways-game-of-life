@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       counter: 0,
-      tempo: 700,
+      rhythm: 700,
       generation: getLexiconByName("Kok's galaxy").grid,
       cellSize: 22,
       currentTimer: null,
@@ -31,7 +31,7 @@ class App extends React.Component {
     showBaner(t('baners.game_of_life'), 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
-    this.handleTempoChange = this.handleTempoChange.bind(this);
+    this.handleRhythmChange = this.handleRhythmChange.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
@@ -42,7 +42,7 @@ class App extends React.Component {
 
   // ----- Lyfecycle Methods ----- //
   componentDidMount() {
-    const timerID = setTimeout(this.nextGenerationTicker, this.state.tempo);
+    const timerID = setTimeout(this.nextGenerationTicker, this.state.rhythm);
     this.setState({ currentTimer: timerID });
   }
 
@@ -52,12 +52,12 @@ class App extends React.Component {
 
   // ----- App Methods ----- //
   nextGenerationTicker() {
-    const timerID = setTimeout(this.nextGenerationTicker, this.state.tempo);
+    const timerID = setTimeout(this.nextGenerationTicker, this.state.rhythm);
     this.setState((prevState) => {
       const newGeneration = this.getNewGeneration(prevState.generation);
       return {
         counter: prevState.counter + 1,
-        tempo: prevState.tempo,
+        rhythm: prevState.rhythm,
         currentTimer: timerID,
         generation: newGeneration,
         isPaused: false
@@ -184,8 +184,8 @@ class App extends React.Component {
   }
   
   // ----- Handlers ----- //
-  handleTempoChange(newTempo) {
-    this.setState({ tempo: newTempo });
+  handleRhythmChange(newRhythm) {
+    this.setState({ rhythm: newRhythm });
   }
 
   handleCellSizeChange(newSize) {
@@ -298,10 +298,10 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
-              <NumberInput label={t('controls.tempo')}
+              <NumberInput label={t('controls.rhythm')}
                 units="MS" min={100} max={3000} step={50}
-                value={this.state.tempo}
-                onChange={this.handleTempoChange}/> 
+                value={this.state.rhythm}
+                onChange={this.handleRhythmChange}/> 
             </div>
             <div className="control">
               <NumberInput label={t('controls.cell_size')}

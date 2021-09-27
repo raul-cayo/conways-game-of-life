@@ -6,7 +6,7 @@ const resources = {
     translation: {
       "controls": {
         "random": "RANDOM",
-        "tempo": "TEMPO",
+        "rhythm": "RHYTHM",
         "cell_size": "CELL SIZE",
         "colors": "COLORS",
         "tooltips": {
@@ -46,7 +46,7 @@ const resources = {
     translation: {
       "controls": {
         "random": "AL AZAR",
-        "tempo": "TEMPO",
+        "rhythm": "RITMO",
         "cell_size": "TAMAÑO DE CELDA",
         "colors": "COLORES",
         "tooltips": {
