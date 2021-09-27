@@ -2,12 +2,16 @@
 :root {
   --cell-off: #404040;
   --cell-on: #40BB6C;
+  --cell-border-radius: 0;
+}
+.cell {
+  border-radius: var(--cell-border-radius);
 }
 .cell-on {
   background: var(--cell-on);
 }
 .cell-off {
-  background: var(--cell-off);
+  background: transparent;
 }
 
 /* ----- Main Layout Containers ----- */

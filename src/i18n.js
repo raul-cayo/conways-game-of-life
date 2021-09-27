@@ -9,6 +9,7 @@ const resources = {
         "rhythm": "RHYTHM",
         "cell_size": "CELL SIZE",
         "colors": "COLORS",
+        "shape": "SHAPE",
         "tooltips": {
           "random_btn": "Get a random example",
           "pause_btn": "Pause",
@@ -49,6 +50,7 @@ const resources = {
         "rhythm": "RITMO",
         "cell_size": "TAMAÑO DE CELDA",
         "colors": "COLORES",
+        "shape": "FIGURA",
         "tooltips": {
           "random_btn": "Ver ejemplo al azar",
           "pause_btn": "Pausar",

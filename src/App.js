@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from './components/grid/Grid';
 import NumberInput from './components/controls/NumberInput';
 import ColorPicker from './components/controls/ColorPicker';
+import ShapeSwitch from './components/controls/ShapeSwitch';
 import InfoModal from './components/modals/InfoModal';
 import { withTranslation } from 'react-i18next';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
@@ -324,6 +325,10 @@ class App extends React.Component {
                   cssVar="--cell-on"
                   title={t('controls.tooltips.on_color_picker')}/>
               </div>
+            </div>
+            <div className="control">
+              <label>{t('controls.shape')}</label>
+              <ShapeSwitch/>
             </div>
           </div>
           <div className="about">
