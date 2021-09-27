@@ -228,7 +228,10 @@ class App extends React.Component {
       for (let i = 0; i < rowsLength; i++) {
         newGeneration.push(newRow);
       }
-      return { generation: newGeneration };
+      return {
+        generation: newGeneration,
+        counter: 0
+      };
     });
   }
 
