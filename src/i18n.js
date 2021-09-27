@@ -34,7 +34,11 @@ const resources = {
         "rule_4": "Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.",
         "resources": "Resources",
         "wikipedia_link": "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life",
-        "youtube_link": "https://www.youtube.com/watch?v=R9Plq-D1gEk"
+        "youtube_link": "https://www.youtube.com/watch?v=R9Plq-D1gEk",
+        "wikipedia_article": "Wikipedia article",
+        "youtube_video": "Youtube video",
+        "lexicon_desc": "Find more patterns and descriptions at the",
+        "github_desc": "The code for this website is on this"
       }
     }
   },
@@ -70,7 +74,11 @@ const resources = {
         "rule_4": "Cualquier célula muerta con exactamente tres vecinos vivos se convierte en una célula viva, como por reproducción.",
         "resources": "Recursos",
         "wikipedia_link": "https://es.wikipedia.org/wiki/Juego_de_la_vida",
-        "youtube_link": "https://www.youtube.com/watch?v=OWXD_wJxCKQ"
+        "youtube_link": "https://www.youtube.com/watch?v=OWXD_wJxCKQ",
+        "wikipedia_article": "Artículo en Wikipedia",
+        "youtube_video": "Video en Youtube",
+        "lexicon_desc": "Encuentra más patrones y descripciones en",
+        "github_desc": "El código de esta app se encuentra en"
       }
     }
   }

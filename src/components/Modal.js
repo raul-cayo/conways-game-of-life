@@ -16,7 +16,7 @@ class Modal extends React.Component {
   render() {
     return (
       <div id={this.modalID} className="modal-background" onClick={this.closeModal}>
-        <div className="modal">
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="modal-head">
             <h2>{this.props.title}</h2>
             <span className="material-icons" onClick={this.closeModal}>close</span>

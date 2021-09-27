@@ -246,7 +246,7 @@ class App extends React.Component {
 
   handleInfoClick() {
     const infoModal = document.getElementById('info-modal');
-    infoModal.style.display = 'block';
+    infoModal.style.display = 'flex';
   }
 
   handlePlantClick() {

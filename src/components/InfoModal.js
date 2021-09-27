@@ -19,9 +19,10 @@ class InfoModal extends React.Component {
         <br/>
         <p>{t('info.resources')}:</p>
         <ul>
-          <li><a href={t('info.wikipedia_link')} target="_blank" rel="noreferrer">Wikipedia</a></li>
-          <li><a href="https://bitstorm.org/gameoflife/lexicon/" target="_blank" rel="noreferrer">Lexicon</a></li>
-          <li><a href={t('info.youtube_link')} target="_blank" rel="noreferrer">Youtube</a></li>
+          <li><a href={t('info.wikipedia_link')} target="_blank" rel="noreferrer">{t('info.wikipedia_article')}</a></li>
+          <li><a href={t('info.youtube_link')} target="_blank" rel="noreferrer">{t('info.youtube_video')}</a></li>
+          <li>{t('info.lexicon_desc')} <a href="https://bitstorm.org/gameoflife/lexicon/" target="_blank" rel="noreferrer">Life Lexicon</a></li>
+          <li>{t('info.github_desc')} <a href="https://github.com/raul-cayo/conways-game-of-life" target="_blank" rel="noreferrer">GitHub Repo</a></li>
         </ul>
       </Modal>
     );
