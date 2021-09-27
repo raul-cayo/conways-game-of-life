@@ -1,11 +1,12 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import './ShapeSwitch.css';
 
 class ShapeSwitch extends React.Component {
   constructor(props) {
     super(props);
     const root = document.documentElement;
-    root.style.setProperty('--cell-border-radius', '50%');
+    root.style.setProperty('--cell-border-radius', 0);
   }
 
   handleClickSquare() {
@@ -16,7 +17,6 @@ class ShapeSwitch extends React.Component {
     circle.classList.remove('shape-selected');
     square.classList.add('shape-selected');
     root.style.setProperty('--cell-border-radius', 0);
-
   }
 
   handleClickCircle() {
@@ -30,13 +30,20 @@ class ShapeSwitch extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="shape-switch-container">
-        <div className="shape square shape-selected" onClick={this.handleClickSquare}></div>
-        <div className="shape circle" onClick={this.handleClickCircle}></div>
+        <div className="shape square shape-selected" 
+          onClick={this.handleClickSquare}
+          title={t("controls.tooltips.square_shape")}>
+        </div>
+        <div className="shape circle"
+          onClick={this.handleClickCircle}
+          title={t("controls.tooltips.circle_shape")}>
+        </div>
       </div>
     )
   }
 }
 
-export default ShapeSwitch;
+export default withTranslation()(ShapeSwitch);

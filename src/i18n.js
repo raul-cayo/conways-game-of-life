@@ -17,12 +17,15 @@ const resources = {
           "clear_btn": "Clear grid",
           "off_color_picker": "Choose a color for dead cells",
           "on_color_picker": "Choose a color for living cells",
+          "square_shape": "Select square for cells shape",
+          "circle_shape": "Select circle for cells shape",
           "info_btn": "Information"
         }
       },
       "baners": {
         "game_of_life": "CONWAY'S GAME OF LIFE",
-        "nothing": "Nothing here yet..."
+        "click_again": "Click again to change language",
+        "lang_changed": "Language changed to english"
       },
       "info": {
         "modal_title": "What is Conway's Game of Life?",
@@ -58,12 +61,15 @@ const resources = {
           "clear_btn": "Limpiar cuadrícula",
           "off_color_picker": "Selecciona un color para celdas muertas",
           "on_color_picker": "Selecciona un color para celdas vivas",
+          "square_shape": "Selecciona un cuadrado para la figura de las celdas",
+          "circle_shape": "Selecciona un circulo para la figura de las celdas",
           "info_btn": "Información"
         }
       },
       "baners": {
         "game_of_life": "EL JUEGO DE LA VIDA DE CONWAY",
-        "nothing": "No hay nada aquí aún..."
+        "click_again": "Haz click otra vez para cambiar el idioma",
+        "lang_changed": "Idioma cambió a español"
       },
       "info": {
         "modal_title": "¿Que es el Juego de la Vida de Conway?",

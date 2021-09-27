@@ -23,11 +23,18 @@ class App extends React.Component {
       isPaused: false
     };
 
+    this.appLanguage = {
+      changed: false,
+      langCode: 'en'
+    }
+
     const { t, i18n } = this.props;
     const language = window.navigator.userLanguage || window.navigator.language;
     if (language.startsWith('es')) {
       i18n.changeLanguage('es');
+      this.appLanguage.langCode = 'es';
     }
+   
 
     showBaner(t('baners.game_of_life'), 3000);
 
@@ -254,8 +261,22 @@ class App extends React.Component {
   }
 
   handlePlantClick() {
-    const { t } = this.props;
-    showBaner(t('baners.nothing'), 1000);
+    const { t, i18n } = this.props;
+
+    if ( this.appLanguage.changed ) {
+      if ( this.appLanguage.langCode === 'en' ) {
+        i18n.changeLanguage('es');
+        this.appLanguage.langCode = 'es';
+      } else {
+        i18n.changeLanguage('en');
+        this.appLanguage.langCode = 'en';
+      }
+      showBaner(t('baners.lang_changed'), 1000);
+    } else {
+      showBaner(t('baners.click_again'), 1000);
+      this.appLanguage.changed = true;
+    }
+
     const plant = document.querySelector('.about .logo img');
     plant.classList.add('swirly-plant');
     setTimeout(() => {
