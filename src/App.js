@@ -1,8 +1,8 @@
 import React from 'react';
-import Grid from './components/Grid';
-import NumberInput from './components/NumberInput';
-import ColorPicker from './components/ColorPicker';
-import InfoModal from './components/InfoModal';
+import Grid from './components/grid/Grid';
+import NumberInput from './components/controls/NumberInput';
+import ColorPicker from './components/controls/ColorPicker';
+import InfoModal from './components/modals/InfoModal';
 import { withTranslation } from 'react-i18next';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
 import {showBaner} from './util/baners';
