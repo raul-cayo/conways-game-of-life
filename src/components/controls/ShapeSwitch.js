@@ -10,22 +10,30 @@ class ShapeSwitch extends React.Component {
   }
 
   handleClickSquare() {
-    const circle = document.querySelector('.shape.circle');
-    const square = document.querySelector('.shape.square');
+    const circles = document.querySelectorAll('.shape.circle');
+    const squares = document.querySelectorAll('.shape.square');
     const root = document.documentElement;
 
-    circle.classList.remove('shape-selected');
-    square.classList.add('shape-selected');
+    for (const circle of circles) {
+      circle.classList.remove('shape-selected');
+    }
+    for (const square of squares) {
+      square.classList.add('shape-selected');
+    }
     root.style.setProperty('--cell-border-radius', 0);
   }
 
   handleClickCircle() {
-    const circle = document.querySelector('.shape.circle');
-    const square = document.querySelector('.shape.square');
+    const circles = document.querySelectorAll('.shape.circle');
+    const squares = document.querySelectorAll('.shape.square');
     const root = document.documentElement;
 
-    square.classList.remove('shape-selected');
-    circle.classList.add('shape-selected');
+    for (const circle of circles) {
+      circle.classList.add('shape-selected');
+    }
+    for (const square of squares) {
+      square.classList.remove('shape-selected');
+    }
     root.style.setProperty('--cell-border-radius', '50%');
   }
 

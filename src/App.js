@@ -45,6 +45,7 @@ class App extends React.Component {
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleClearGrid = this.handleClearGrid.bind(this);
+    this.handleOpenConfig = this.handleOpenConfig.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
     this.handlePlantClick = this.handlePlantClick.bind(this);
   }
