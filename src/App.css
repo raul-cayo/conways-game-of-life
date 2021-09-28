@@ -35,10 +35,11 @@
   padding: 0 12px 4px 22px;
 }
 .controls,
+.controls .config,
 .about {
   color: #EEE;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .control,
 .counter,
@@ -49,6 +50,12 @@
   justify-content: center;
   margin: 0 10px;
   text-align: center;
+}
+.controls .config {
+  margin-left: 20px;
+}
+.control {
+  width: fit-content;
 }
 
 /* ----- Buttons and Links ----- */
@@ -76,24 +83,6 @@ button:active {
               inset -4px -4px 8px #FFFFFF10;
   padding: 11px 9px 9px 11px;
 }
-a {
-  color: #0594ED;
-}
-a:visited {
-  color: #A049F2;
-} 
-
-/* ----- Controls ----- */
-.controls .control:nth-child(4) {
-  margin-left: 40px;
-}
-.controls .control label {
-  margin-bottom: 2px;
-  font-size: 14px;
-}
-.controls .control label span {
-  font-size: 10px;
-}
 .controls .control .random-btn {
   background: rgb(64,187,108);
   background: linear-gradient(240deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
@@ -106,8 +95,29 @@ a:visited {
   background: rgb(150,201,61);
   background: linear-gradient(60deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
 }
-.controls .control .colors {
+a {
+  color: #0594ED;
+}
+a:visited {
+  color: #A049F2;
+} 
+
+/* ----- Controls ----- */
+.control label {
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+.control label span {
+  font-size: 10px;
+}
+.control .colors {
   display: flex;
+}
+.controls .control .config-btn {
+  display: none;
+}
+.control {
+  width: fit-content;
 }
 
 /* ----- About Section ----- */
@@ -144,6 +154,22 @@ a:visited {
   transform: translateX(-50%);
 }
 
+/* ----- Config Modal ----- */
+#config-modal .modal {
+  max-width: 400px;
+}
+.config-modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.config-modal-container .control {
+  margin-bottom: 12px;
+}
+.config-modal-container .control:last-child {
+  margin-bottom: 0;
+}
+
 /* ----- Animations ----- */
 @keyframes rotate360 {
 	0% { transform: rotate(0deg); }
@@ -164,4 +190,64 @@ a:visited {
   animation-duration: 2.5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+}
+
+/* ----- Responsive Behaviour ----- */
+@media screen and (max-width: 1100px) {
+  .controls .config {
+    display: none;
+  }
+  .controls .control .config-btn {
+    display: block;
+  }
+}
+@media screen and (max-width: 700px) {
+  .control,
+  .counter,
+  .info,
+  .logo {
+    margin: 0 5px;
+    text-align: center;
+  }
+  .controls .config {
+    display: none;
+  }
+  .controls-container {
+    height: 80px;
+    justify-content: space-between;
+    padding: 0 8px 4px 8px;
+  }
+  button {
+    height: 40px;
+    padding: 5px;
+    width: 40px;
+  }
+  button:active {
+    padding: 6px 4px 4px 6px;
+  }
+  .controls .control .random-btn {
+    font-size: 14px;
+  }
+  .about .counter p {
+    margin-right: 4px;
+  }
+  .logo {
+    display: none;
+  }
+}
+@media screen and (max-width: 450px) {
+  .control,
+  .counter,
+  .info,
+  .logo {
+    margin: 0 4px;
+  }
+  .controls-container {
+    height: 70px;
+    padding: 0 6px 4px 6px;
+  }
+  button {
+    height: 36px;
+    width: 36px;
+  }
 }

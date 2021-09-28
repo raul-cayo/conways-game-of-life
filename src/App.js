@@ -3,6 +3,7 @@ import Grid from './components/grid/Grid';
 import NumberInput from './components/controls/NumberInput';
 import ColorPicker from './components/controls/ColorPicker';
 import ShapeSwitch from './components/controls/ShapeSwitch';
+import Modal from './components/modals/Modal';
 import InfoModal from './components/modals/InfoModal';
 import { withTranslation } from 'react-i18next';
 import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
@@ -224,6 +225,9 @@ class App extends React.Component {
   }
 
   handleClearGrid() {
+    if (!this.state.isPaused) {
+      this.handlePausePlayGame();
+    }
     this.setState((prevState) => {
       const rowsLength = prevState.generation.length;
       const columnsLength = prevState.generation[0].length;
@@ -241,6 +245,14 @@ class App extends React.Component {
         counter: 0
       };
     });
+  }
+
+  handleOpenConfig() {
+    if (!this.state.isPaused) {
+      this.handlePausePlayGame();
+    }
+    const configModal = document.getElementById('config-modal');
+    configModal.style.display = 'flex';
   }
 
   handleCellClick(row, column) {
@@ -323,35 +335,46 @@ class App extends React.Component {
               </button>
             </div>
             <div className="control">
-              <NumberInput label={t('controls.rhythm')}
-                units="MS" min={100} max={3000} step={50}
-                value={this.state.rhythm}
-                onChange={this.handleRhythmChange}/> 
+              <button type="button"
+                className="config-btn"
+                onClick={this.handleOpenConfig}>
+                <span className="material-icons">settings</span>
+              </button>
             </div>
-            <div className="control">
-              <NumberInput label={t('controls.cell_size')}
-                units="PX" min={16} max={50} step={5}
-                value={this.state.cellSize}
-                onChange={this.handleCellSizeChange}/>
-            </div>
-            <div className="control">
-              <label>{t("controls.colors")}</label>
-              <div className="colors">
-                <ColorPicker 
-                  color="#404040"
-                  cssVar="--cell-off"
-                  title={t('controls.tooltips.off_color_picker')}/>
-                <ColorPicker 
-                  color="#40BB6C"
-                  cssVar="--cell-on"
-                  title={t('controls.tooltips.on_color_picker')}/>
+
+            <div className="config">
+              <div className="control">
+                <NumberInput label={t('controls.rhythm')}
+                  units="MS" min={100} max={3000} step={50}
+                  value={this.state.rhythm}
+                  onChange={this.handleRhythmChange}/> 
+              </div>
+              <div className="control">
+                <NumberInput label={t('controls.cell_size')}
+                  units="PX" min={16} max={50} step={5}
+                  value={this.state.cellSize}
+                  onChange={this.handleCellSizeChange}/>
+              </div>
+              <div className="control">
+                <label>{t("controls.colors")}</label>
+                <div className="colors">
+                  <ColorPicker 
+                    color="#404040"
+                    cssVar="--cell-off"
+                    title={t('controls.tooltips.off_color_picker')}/>
+                  <ColorPicker 
+                    color="#40BB6C"
+                    cssVar="--cell-on"
+                    title={t('controls.tooltips.on_color_picker')}/>
+                </div>
+              </div>
+              <div className="control">
+                <label>{t('controls.shape')}</label>
+                <ShapeSwitch/>
               </div>
             </div>
-            <div className="control">
-              <label>{t('controls.shape')}</label>
-              <ShapeSwitch/>
-            </div>
           </div>
+
           <div className="about">
             <div className="counter">
               <p>{this.state.counter}</p>
@@ -369,7 +392,41 @@ class App extends React.Component {
           </div>
         </div>
         
+        {/* ----- Modals ----- */}
         <InfoModal/>
+        <Modal id="config-modal" title={t("Configuration")}>
+          <div className="config-modal-container">
+              <div className="control">
+                <NumberInput label={t('controls.rhythm')}
+                  units="MS" min={100} max={3000} step={50}
+                  value={this.state.rhythm}
+                  onChange={this.handleRhythmChange}/> 
+              </div>
+              <div className="control">
+                <NumberInput label={t('controls.cell_size')}
+                  units="PX" min={16} max={50} step={5}
+                  value={this.state.cellSize}
+                  onChange={this.handleCellSizeChange}/>
+              </div>
+              <div className="control">
+                <label>{t("controls.colors")}</label>
+                <div className="colors">
+                  <ColorPicker 
+                    color="#404040"
+                    cssVar="--cell-off"
+                    title={t('controls.tooltips.off_color_picker')}/>
+                  <ColorPicker 
+                    color="#40BB6C"
+                    cssVar="--cell-on"
+                    title={t('controls.tooltips.on_color_picker')}/>
+                </div>
+              </div>
+              <div className="control">
+                <label>{t('controls.shape')}</label>
+                <ShapeSwitch/>
+              </div>
+            </div>
+        </Modal>
       </div>
     );
   }
