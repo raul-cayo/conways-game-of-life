@@ -21,7 +21,7 @@ class ColorPicker extends React.Component {
     this.debouncerID = setTimeout(() => {
       const root = document.documentElement;
       root.style.setProperty(this.props.cssVar, newValue);
-    }, 1200);      
+    }, 1000);      
   }
 
   render() {

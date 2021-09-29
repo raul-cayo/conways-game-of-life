@@ -13,7 +13,7 @@ import './App.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const initialCellSize = 22;
+    const initialCellSize = this.calculateCellSize();
     const initialGridSize = this.getNewGridSize(initialCellSize);
     const initialPattern = getPatternByName("Kok's galaxy").grid;
     const firstGeneration = this.getAdjustedSizeGeneration(initialPattern, initialGridSize);
@@ -23,6 +23,7 @@ class App extends React.Component {
       rhythm: 700,
       generation: firstGeneration,
       cellSize: initialCellSize,
+      minCellSize: this.calculateMinCellSize(),
       currentTimer: null,
       isPaused: false
     };
@@ -210,12 +211,41 @@ class App extends React.Component {
       };
     });
   }
+
+  calculateMinCellSize() {
+    if (window.innerWidth > 700) {
+      return Math.floor(window.innerWidth / 75);
+    } else if (window.innerWidth > 450) {
+      return Math.floor(window.innerWidth / 50);
+    } else {
+      return Math.floor(window.innerWidth / 35);
+    }
+  }
+
+  calculateCellSize() {
+    if (window.innerWidth > 700) {
+      return Math.floor(window.innerWidth / 60);
+    } else if (window.innerWidth > 450) {
+      return Math.floor(window.innerWidth / 35);
+    } else {
+      return Math.floor(window.innerWidth / 25);
+    }
+  }
   
   // ----- Handlers ----- //
   handleWindowResize() {
     clearTimeout(this.windowResizeDedouncerID);
     this.windowResizeDedouncerID = setTimeout(() => {
-      this.handleCellSizeChange(this.state.cellSize);
+      this.setState((prevState) => {
+        const newCellSize = this.calculateCellSize();
+        const newGridSize = this.getNewGridSize(newCellSize);
+        const adjustedGeneration = this.getAdjustedSizeGeneration(prevState.generation, newGridSize);
+        return {
+          generation: adjustedGeneration,
+          cellSize: newCellSize,
+          minCellSize: this.calculateMinCellSize()
+        };
+      });
     }, 500);
   }
 
@@ -353,6 +383,7 @@ class App extends React.Component {
               <ConfigController flexDirection="row"
                 rhythm={this.state.rhythm}
                 cellSize={this.state.cellSize}
+                minCellSize={this.state.minCellSize}
                 rhythmHandler={this.handleRhythmChange}
                 cellSizeHandler={this.handleCellSizeChange}/> : null }
           </div>
@@ -379,6 +410,7 @@ class App extends React.Component {
             <ConfigController flexDirection="column"
               rhythm={this.state.rhythm}
               cellSize={this.state.cellSize}
+              minCellSize={this.state.minCellSize}
               rhythmHandler={this.handleRhythmChange}
               cellSizeHandler={this.handleCellSizeChange}/> : null
           }

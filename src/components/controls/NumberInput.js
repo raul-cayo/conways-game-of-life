@@ -42,7 +42,7 @@ class NumberInput extends React.Component {
     clearTimeout(this.debouncerID);
     this.debouncerID = setTimeout(() => {
         this.props.onChange( this.state.value );
-    }, 1000); 
+    }, 500); 
   }
 
   handleMinus() {
@@ -57,7 +57,7 @@ class NumberInput extends React.Component {
     clearTimeout(this.debouncerID);
     this.debouncerID = setTimeout(() => {
         this.props.onChange( this.state.value );
-    }, 1000); 
+    }, 500); 
   }
 
   render() {

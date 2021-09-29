@@ -7,7 +7,7 @@
 .number-input-container input[type='number'] {
   background: #404040;
   border-radius: 4px;
-  box-shadow: 4px 4px 8px #000,
+  box-shadow: 4px 4px 8px #000000,
               inset 4px 4px 8px #00000030, 
               inset -4px -4px 8px #FFFFFF10;
   border-style: none;
@@ -21,7 +21,7 @@
   -moz-appearance: textfield;
 }
 .number-input-container input[type='number']:hover {
-  box-shadow: 4px 4px 4px 2px #000,
+  box-shadow: 4px 4px 4px 2px #000000,
               inset 4px 4px 8px #00000030, 
               inset -4px -4px 8px #FFFFFF10;
 }
@@ -32,7 +32,7 @@
 }
 .number-input-container .number-input-btn {
   bottom: 10px;
-  box-shadow: 2px 2px 6px 0 #000,
+  box-shadow: 2px 2px 6px 0 #000000,
               inset 2px 2px 4px #FFFFFF10, 
               inset -2px -2px 4px #00000030;
   height: 10px;
@@ -42,12 +42,12 @@
   width: 10px;
 }
 .number-input-container .number-input-btn:hover {
-  box-shadow: 2px 2px 2px 0px #000,
+  box-shadow: 2px 2px 2px 0px #000000,
               inset 4px 4px 8px #FFFFFF10, 
               inset -4px -4px 8px #00000030;
 }
 .number-input-container .number-input-btn:active {
-  box-shadow: 3px 3px 6px #000,
+  box-shadow: 3px 3px 6px #000000,
               inset 4px 4px 8px #00000030, 
               inset -4px -4px 8px #FFFFFF10;
   padding: 11px 9px 9px 11px;

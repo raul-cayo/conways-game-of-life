@@ -19,7 +19,7 @@ class ConfigController extends React.Component {
         </div>
         <div className="control">
           <NumberInput label={t('controls.cell_size')}
-            units="PX" min={16} max={50} step={2}
+            units="PX" min={this.props.minCellSize} max={50} step={2}
             value={this.props.cellSize}
             onChange={this.props.cellSizeHandler}/>
         </div>
