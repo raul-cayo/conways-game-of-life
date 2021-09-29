@@ -18,7 +18,7 @@ class App extends React.Component {
     const initialCellSize = 22;
     const initialGridSize = this.getNewGridSize(initialCellSize);
     const initialPattern = getPatternByName("Kok's galaxy").grid;
-    const firstGeneration = this.getAdjustedGenerationSize(initialPattern, initialGridSize);
+    const firstGeneration = this.getAdjustedSizeGeneration(initialPattern, initialGridSize);
     this.state = {
       counter: 0,
       rhythm: 700,
@@ -103,63 +103,79 @@ class App extends React.Component {
     };
   }
 
-  getAdjustedGenerationSize(prevGeneration, newGridSize) {
+  getAdjustedSizeGeneration(prevGeneration, newGridSize) {
     const rowsDiff = newGridSize.rows - prevGeneration.length;
     const columnsDiff = newGridSize.columns - prevGeneration[0].length;
-    const adjustedPrevGeneration = [];
+    const adjustedSizeGeneration = [];
     for (const row of prevGeneration) {
-      adjustedPrevGeneration.push([...row]);
+      adjustedSizeGeneration.push([...row]);
     }
 
-    if (columnsDiff > 0) { // newColumnsLength > prevColumnsLength
-      const halfDiff = Math.floor(columnsDiff / 2);
-      for (let row = 0; row < prevGeneration.length; row++) {
-        for (let i = 0; i < halfDiff; i++) {
-          adjustedPrevGeneration[row].unshift(0);
-          adjustedPrevGeneration[row].push(0);
-        }
-        if (columnsDiff % 2) {
-          adjustedPrevGeneration[row].push(0);
-        }
+    if (columnsDiff > 0) {
+      this.addColumns(adjustedSizeGeneration, columnsDiff);
+    }
+    if (columnsDiff < 0) {
+      this.removeColums(adjustedSizeGeneration, Math.abs(columnsDiff));
+    }
+    if (rowsDiff > 0) {
+      this.addRows(adjustedSizeGeneration, rowsDiff);
+    }
+    if (rowsDiff < 0) {
+      this.removeRows(adjustedSizeGeneration, Math.abs(rowsDiff));
+    }
+    return adjustedSizeGeneration;
+  }
+
+  addColumns(generation, number) {
+    const halfNumber = Math.floor(number / 2);
+    for (let row = 0; row < generation.length; row++) {
+      for (let i = 0; i < halfNumber; i++) {
+        generation[row].unshift(0);
+        generation[row].push(0);
+      }
+      if (number % 2) {
+        generation[row].push(0);
       }
     }
-    if (columnsDiff < 0) { // newColumnsLength < prevColumnsLength
-      const halfDiff = Math.floor(Math.abs(columnsDiff) / 2);
-      for (let row = 0; row < prevGeneration.length; row++) {
-        for (let i = 0; i < halfDiff; i++) {
-          adjustedPrevGeneration[row].shift();
-          adjustedPrevGeneration[row].pop();
-        }
-        if (Math.abs(columnsDiff) % 2) {
-          adjustedPrevGeneration[row].pop();
-        }
-      }
-    }
-    if (rowsDiff > 0) { // newRowsLength > prevRowsLength
-      const halfDiff = Math.floor(rowsDiff / 2);
-      const newRow = [];
-      for (let i = 0; i < newGridSize.columns; i++) {
-        newRow.push(0);
-      }
+  }
+
+  removeColums(generation, number) {
+    const halfDiff = Math.floor(number / 2);
+    for (let row = 0; row < generation.length; row++) {
       for (let i = 0; i < halfDiff; i++) {
-        adjustedPrevGeneration.unshift(newRow);
-        adjustedPrevGeneration.push(newRow);
+        generation[row].shift();
+        generation[row].pop();
       }
-      if (rowsDiff % 2) {
-        adjustedPrevGeneration.push(newRow);
-      }
-    }
-    if (rowsDiff < 0) { // newRowsLength < prevRowsLength
-      const halfDiff = Math.floor(Math.abs(rowsDiff) / 2);
-      for (let i = 0; i < halfDiff; i++) {
-        adjustedPrevGeneration.shift();
-        adjustedPrevGeneration.pop();
-      }
-      if (Math.abs(rowsDiff) % 2) {
-        adjustedPrevGeneration.pop();
+      if (number % 2) {
+        generation[row].pop();
       }
     }
-    return adjustedPrevGeneration;
+  }
+
+  addRows(generation, number) {
+    const halfDiff = Math.floor(number / 2);
+    const newRow = [];
+    for (let i = 0; i < generation[0].length; i++) {
+      newRow.push(0);
+    }
+    for (let i = 0; i < halfDiff; i++) {
+      generation.unshift(newRow);
+      generation.push(newRow);
+    }
+    if (number % 2) {
+      generation.push(newRow);
+    }
+  }
+
+  removeRows(generation, number) {
+    const halfDiff = Math.floor(number / 2);
+    for (let i = 0; i < halfDiff; i++) {
+      generation.shift();
+      generation.pop();
+    }
+    if (number % 2) {
+      generation.pop();
+    }
   }
 
   countNeighbors(generation, row, column) {
@@ -205,7 +221,7 @@ class App extends React.Component {
   handleCellSizeChange(newSize) {
     this.setState((prevState) => {
       const newGridSize = this.getNewGridSize(newSize);
-      const adjustedGeneration = this.getAdjustedGenerationSize(prevState.generation, newGridSize);
+      const adjustedGeneration = this.getAdjustedSizeGeneration(prevState.generation, newGridSize);
       return { 
         cellSize: newSize,
         generation: adjustedGeneration
