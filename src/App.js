@@ -240,10 +240,13 @@ class App extends React.Component {
   }
 
   handleRandomPattern() {
-    const pattern = getRandomPattern();
-    showBaner(pattern.name, 2000);
+    const gridSize = this.getNewGridSize(this.state.cellSize);
+    const randomPattern = getRandomPattern();
+    const adjustedPattern = this.getAdjustedSizeGeneration(randomPattern.grid, gridSize);
+    
+    showBaner(randomPattern.name, 2000);
     this.setState({ 
-      generation: pattern.grid,
+      generation: adjustedPattern,
       counter: 0
     });
   }
