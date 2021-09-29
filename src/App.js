@@ -17,6 +17,7 @@ class App extends React.Component {
     const initialGridSize = this.getNewGridSize(initialCellSize);
     const initialPattern = getPatternByName("Kok's galaxy").grid;
     const firstGeneration = this.getAdjustedSizeGeneration(initialPattern, initialGridSize);
+    this.windowResizeDedouncerID = null;
     this.state = {
       counter: 0,
       rhythm: 700,
@@ -220,7 +221,10 @@ class App extends React.Component {
   
   // ----- Handlers ----- //
   handleWindowResize() {
-    this.handleCellSizeChange(this.state.cellSize);
+    clearTimeout(this.windowResizeDedouncerID);
+    this.windowResizeDedouncerID = setTimeout(() => {
+      this.handleCellSizeChange(this.state.cellSize);
+    }, 500);
   }
 
   handleCellClick(row, column) {
@@ -365,19 +369,22 @@ class App extends React.Component {
                 <span className="material-icons">delete</span>
               </button>
             </div>
-            <div className="control">
-              <button type="button"
-                className="config-btn"
-                onClick={this.handleOpenConfig}>
-                <span className="material-icons">settings</span>
-              </button>
-            </div>
-
-            <ConfigController flexDirection="row"
-              rhythm={this.state.rhythm}
-              cellSize={this.state.cellSize}
-              rhythmHandler={this.handleRhythmChange}
-              cellSizeHandler={this.handleCellSizeChange}/>
+            { window.innerWidth <= 1100 ? 
+              <div className="control">
+                <button type="button"
+                  className="config-btn"
+                  onClick={this.handleOpenConfig}>
+                  <span className="material-icons">settings</span>
+                </button>
+              </div> : null
+            }
+            { window.innerWidth > 1100 ? 
+              <ConfigController flexDirection="row"
+                rhythm={this.state.rhythm}
+                cellSize={this.state.cellSize}
+                rhythmHandler={this.handleRhythmChange}
+                cellSizeHandler={this.handleCellSizeChange}/> : null
+            }
           </div>
 
           <div className="about">
@@ -400,11 +407,13 @@ class App extends React.Component {
         {/* ----- Modals ----- */}
         <InfoModal/>
         <Modal id="config-modal" title={t("Configuration")}>
-          <ConfigController flexDirection="column"
-            rhythm={this.state.rhythm}
-            cellSize={this.state.cellSize}
-            rhythmHandler={this.handleRhythmChange}
-            cellSizeHandler={this.handleCellSizeChange}/>
+          { window.innerWidth <= 1100 ? 
+            <ConfigController flexDirection="column"
+              rhythm={this.state.rhythm}
+              cellSize={this.state.cellSize}
+              rhythmHandler={this.handleRhythmChange}
+              cellSizeHandler={this.handleCellSizeChange}/> : null
+          }
         </Modal>
       </div>
     );

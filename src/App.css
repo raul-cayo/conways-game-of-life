@@ -106,9 +106,6 @@ a:visited {
 .control label span {
   font-size: 10px;
 }
-.controls .control .config-btn {
-  display: none;
-}
 .control {
   width: fit-content;
 }
@@ -175,14 +172,6 @@ a:visited {
 }
 
 /* ----- Responsive Behaviour ----- */
-@media screen and (max-width: 1100px) {
-  .config-controller.row-direction {
-    display: none;
-  }
-  .controls .control .config-btn {
-    display: block;
-  }
-}
 @media screen and (max-width: 700px) {
   .control,
   .counter,
