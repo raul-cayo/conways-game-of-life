@@ -7,7 +7,7 @@
   margin-bottom: 10vh;
   max-height: 80vh;
   overflow-y: auto;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   width: 60vw;
   z-index: 200;
 }
@@ -24,10 +24,13 @@
   z-index: 100;
 }
 .modal-head {
+  background: #242424;
   border-bottom: 2px solid #404040;
   display: flex;
   justify-content: space-between;
-  padding: 0 0 10px 10px;
+  padding: 20px 0 10px 10px;
+  position: sticky;
+  top: 0;
 }
 .modal-head h2,
 .modal-head span {
@@ -67,6 +70,9 @@
 @media screen and (max-width: 450px) {
   .modal {
     max-height: 90vh;
-    padding: 12px;
+    padding: 0 12px 12px 12px;;
+  }
+  .modal-head {
+    padding-top: 12px;
   }
 }

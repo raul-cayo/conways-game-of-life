@@ -13,13 +13,13 @@ class ConfigController extends React.Component {
       <div className={'config-controller ' + directionClass}>
         <div className="control">
           <NumberInput label={t('controls.rhythm')}
-            units="MS" min={100} max={3000} step={50}
+            units="MS" min={100} max={3000} step={100}
             value={this.props.rhythm}
             onChange={this.props.rhythmHandler}/> 
         </div>
         <div className="control">
           <NumberInput label={t('controls.cell_size')}
-            units="PX" min={16} max={50} step={5}
+            units="PX" min={16} max={50} step={2}
             value={this.props.cellSize}
             onChange={this.props.cellSizeHandler}/>
         </div>
