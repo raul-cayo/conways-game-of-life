@@ -5,8 +5,8 @@ import ColorPicker from './components/controls/ColorPicker';
 import ShapeSwitch from './components/controls/ShapeSwitch';
 import Modal from './components/modals/Modal';
 import InfoModal from './components/modals/InfoModal';
-import { withTranslation } from 'react-i18next';
-import {getLexiconByName, getRandomLexiconExample} from './util/lexicon';
+import {withTranslation} from 'react-i18next';
+import {getPatternByName, getRandomPattern} from './util/lexicon';
 import {showBaner} from './util/baners';
 import './reset.css';
 import './App.css';
@@ -17,8 +17,8 @@ class App extends React.Component {
     super(props);
     const initialCellSize = 22;
     const initialGridSize = this.getNewGridSize(initialCellSize);
-    const initialLexiconTerm = getLexiconByName("Kok's galaxy").grid;
-    const firstGeneration = this.getAdjustedGenerationSize(initialLexiconTerm, initialGridSize);
+    const initialPattern = getPatternByName("Kok's galaxy").grid;
+    const firstGeneration = this.getAdjustedGenerationSize(initialPattern, initialGridSize);
     this.state = {
       counter: 0,
       rhythm: 700,
@@ -42,7 +42,7 @@ class App extends React.Component {
     this.handleRhythmChange = this.handleRhythmChange.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
-    this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
+    this.handleRandomPattern = this.handleRandomPattern.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
     this.handleClearGrid = this.handleClearGrid.bind(this);
     this.handleOpenConfig = this.handleOpenConfig.bind(this);
@@ -68,7 +68,6 @@ class App extends React.Component {
       const newGeneration = this.getNewGeneration(prevState.generation);
       return {
         counter: prevState.counter + 1,
-        rhythm: prevState.rhythm,
         currentTimer: timerID,
         generation: newGeneration,
         isPaused: false
@@ -214,8 +213,8 @@ class App extends React.Component {
     });
   }
 
-  handleRandomLexicon() {
-    const term = getRandomLexiconExample();
+  handleRandomPattern() {
+    const term = getRandomPattern();
     showBaner(term.name, 2000);
     this.setState({ 
       generation: term.grid,
@@ -325,7 +324,7 @@ class App extends React.Component {
               <button type="button"
                 className="random-btn"
                 title={t('controls.tooltips.random_btn')}
-                onClick={this.handleRandomLexicon}>
+                onClick={this.handleRandomPattern}>
                 {t('controls.random')}
               </button>
             </div>
