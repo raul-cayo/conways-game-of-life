@@ -1,0 +1,22 @@
+.config-controller {
+  color: #EEE;
+  display: flex;
+  align-items: center;
+}
+.config-controller .colors {
+  display: flex;
+}
+.config-controller.row-direction {
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+.config-controller.column-direction {
+  flex-direction: column;
+}
+.config-controller.column-direction .control {
+  margin-bottom: 12px;
+}
+.config-controller.column-direction .control:last-child {
+  margin-bottom: 0;
+}

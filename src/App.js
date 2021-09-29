@@ -1,8 +1,6 @@
 import React from 'react';
 import Grid from './components/grid/Grid';
-import NumberInput from './components/controls/NumberInput';
-import ColorPicker from './components/controls/ColorPicker';
-import ShapeSwitch from './components/controls/ShapeSwitch';
+import ConfigController from './components/controls/ConfigController';
 import Modal from './components/modals/Modal';
 import InfoModal from './components/modals/InfoModal';
 import {withTranslation} from 'react-i18next';
@@ -375,37 +373,11 @@ class App extends React.Component {
               </button>
             </div>
 
-            <div className="config">
-              <div className="control">
-                <NumberInput label={t('controls.rhythm')}
-                  units="MS" min={100} max={3000} step={50}
-                  value={this.state.rhythm}
-                  onChange={this.handleRhythmChange}/> 
-              </div>
-              <div className="control">
-                <NumberInput label={t('controls.cell_size')}
-                  units="PX" min={16} max={50} step={5}
-                  value={this.state.cellSize}
-                  onChange={this.handleCellSizeChange}/>
-              </div>
-              <div className="control">
-                <label>{t("controls.colors")}</label>
-                <div className="colors">
-                  <ColorPicker 
-                    color="#404040"
-                    cssVar="--cell-off"
-                    title={t('controls.tooltips.off_color_picker')}/>
-                  <ColorPicker 
-                    color="#40BB6C"
-                    cssVar="--cell-on"
-                    title={t('controls.tooltips.on_color_picker')}/>
-                </div>
-              </div>
-              <div className="control">
-                <label>{t('controls.shape')}</label>
-                <ShapeSwitch/>
-              </div>
-            </div>
+            <ConfigController flexDirection="row"
+              rhythm={this.state.rhythm}
+              cellSize={this.state.cellSize}
+              rhythmHandler={this.handleRhythmChange}
+              cellSizeHandler={this.handleCellSizeChange}/>
           </div>
 
           <div className="about">
@@ -428,37 +400,11 @@ class App extends React.Component {
         {/* ----- Modals ----- */}
         <InfoModal/>
         <Modal id="config-modal" title={t("Configuration")}>
-          <div className="config-modal-container">
-              <div className="control">
-                <NumberInput label={t('controls.rhythm')}
-                  units="MS" min={100} max={3000} step={50}
-                  value={this.state.rhythm}
-                  onChange={this.handleRhythmChange}/> 
-              </div>
-              <div className="control">
-                <NumberInput label={t('controls.cell_size')}
-                  units="PX" min={16} max={50} step={5}
-                  value={this.state.cellSize}
-                  onChange={this.handleCellSizeChange}/>
-              </div>
-              <div className="control">
-                <label>{t("controls.colors")}</label>
-                <div className="colors">
-                  <ColorPicker 
-                    color="#404040"
-                    cssVar="--cell-off"
-                    title={t('controls.tooltips.off_color_picker')}/>
-                  <ColorPicker 
-                    color="#40BB6C"
-                    cssVar="--cell-on"
-                    title={t('controls.tooltips.on_color_picker')}/>
-                </div>
-              </div>
-              <div className="control">
-                <label>{t('controls.shape')}</label>
-                <ShapeSwitch/>
-              </div>
-            </div>
+          <ConfigController flexDirection="column"
+            rhythm={this.state.rhythm}
+            cellSize={this.state.cellSize}
+            rhythmHandler={this.handleRhythmChange}
+            cellSizeHandler={this.handleCellSizeChange}/>
         </Modal>
       </div>
     );

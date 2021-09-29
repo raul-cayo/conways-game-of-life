@@ -35,7 +35,6 @@
   padding: 0 12px 4px 22px;
 }
 .controls,
-.controls .config,
 .about {
   color: #EEE;
   display: flex;
@@ -50,9 +49,6 @@
   justify-content: center;
   margin: 0 10px;
   text-align: center;
-}
-.controls .config {
-  margin-left: 20px;
 }
 .control {
   width: fit-content;
@@ -110,9 +106,6 @@ a:visited {
 .control label span {
   font-size: 10px;
 }
-.control .colors {
-  display: flex;
-}
 .controls .control .config-btn {
   display: none;
 }
@@ -158,17 +151,6 @@ a:visited {
 #config-modal .modal {
   max-width: 400px;
 }
-.config-modal-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.config-modal-container .control {
-  margin-bottom: 12px;
-}
-.config-modal-container .control:last-child {
-  margin-bottom: 0;
-}
 
 /* ----- Animations ----- */
 @keyframes rotate360 {
@@ -194,7 +176,7 @@ a:visited {
 
 /* ----- Responsive Behaviour ----- */
 @media screen and (max-width: 1100px) {
-  .controls .config {
+  .config-controller.row-direction {
     display: none;
   }
   .controls .control .config-btn {
