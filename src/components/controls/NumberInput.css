@@ -12,12 +12,12 @@
               inset -4px -4px 8px #FFFFFF10;
   border-style: none;
   color: #EEEEEE;
-  margin-bottom: 4px;
   line-height: 1.8;
-  text-align: center;
-  min-width: 120px;
+  margin-bottom: 4px;
   max-width: 155px;
+  min-width: 120px;
   padding: 1px 30px;
+  text-align: center;
   -moz-appearance: textfield;
 }
 .number-input-container input[type='number']:hover {
@@ -31,15 +31,15 @@
   margin: 0;
 }
 .number-input-container .number-input-btn {
+  bottom: 10px;
   box-shadow: 2px 2px 6px 0 #000,
               inset 2px 2px 4px #FFFFFF10, 
               inset -2px -2px 4px #00000030;
-  width: 10px;
   height: 10px;
   padding: 10px;
   position: absolute;
   text-align: center;
-  bottom: 10px;
+  width: 10px;
 }
 .number-input-container .number-input-btn:hover {
   box-shadow: 2px 2px 2px 0px #000,
@@ -53,10 +53,10 @@
   padding: 11px 9px 9px 11px;
 }
 .number-input-container .number-input-btn:disabled {
+  background-color: #555;
   box-shadow: 1px 1px 2px #00000070,
               inset 4px 4px 8px #00000030, 
               inset -4px -4px 8px #FFFFFF10;
-  background-color: #555;
   padding: 11px 9px 9px 11px;
   color: #AAA;
 }

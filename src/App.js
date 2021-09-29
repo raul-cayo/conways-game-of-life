@@ -91,7 +91,7 @@ class App extends React.Component {
   getNewGridSize(cellSize) {
     return {
       columns: Math.floor(window.innerWidth / cellSize),
-      rows: Math.floor((window.innerHeight - 101) / cellSize)
+      rows: Math.floor((window.innerHeight - 100) / cellSize)
     };
   }
 

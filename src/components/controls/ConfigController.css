@@ -1,7 +1,7 @@
 .config-controller {
+  align-items: center;
   color: #EEE;
   display: flex;
-  align-items: center;
 }
 .config-controller .colors {
   display: flex;
