@@ -20,7 +20,7 @@ class App extends React.Component {
     this.windowResizeDedouncerID = null;
     this.state = {
       counter: 0,
-      rhythm: 700,
+      rhythm: 500,
       generation: firstGeneration,
       cellSize: initialCellSize,
       minCellSize: this.calculateMinCellSize(),
