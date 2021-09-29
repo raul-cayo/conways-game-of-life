@@ -15,32 +15,32 @@ import PlantImage from './images/plant.png';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    const initialCellSize = 22;
+    const initialGridSize = this.getNewGridSize(initialCellSize);
+    const initialLexiconTerm = getLexiconByName("Kok's galaxy").grid;
+    const firstGeneration = this.getAdjustedGenerationSize(initialLexiconTerm, initialGridSize);
     this.state = {
       counter: 0,
       rhythm: 700,
-      generation: getLexiconByName("Kok's galaxy").grid,
-      cellSize: 22,
+      generation: firstGeneration,
+      cellSize: initialCellSize,
       currentTimer: null,
       isPaused: false
     };
 
-    this.appLanguage = {
-      changed: false,
-      langCode: 'en'
-    }
-
+    this.appLanguage = { changed: false, langCode: 'en' };
     const { t, i18n } = this.props;
     const language = window.navigator.userLanguage || window.navigator.language;
     if (language.startsWith('es')) {
       i18n.changeLanguage('es');
       this.appLanguage.langCode = 'es';
     }
-   
 
     showBaner(t('baners.game_of_life'), 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
     this.handleRhythmChange = this.handleRhythmChange.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
     this.handleRandomLexicon = this.handleRandomLexicon.bind(this);
     this.handlePausePlayGame = this.handlePausePlayGame.bind(this);
@@ -52,6 +52,7 @@ class App extends React.Component {
 
   // ----- Lyfecycle Methods ----- //
   componentDidMount() {
+    window.addEventListener('resize', this.handleWindowResize);
     const timerID = setTimeout(this.nextGenerationTicker, this.state.rhythm);
     this.setState({ currentTimer: timerID });
   }
@@ -77,16 +78,16 @@ class App extends React.Component {
 
   getNewGeneration(prevGeneration) {
     const newGeneration = [];
-    const newGridSize = this.getNewGridSize(this.state.cellSize);
-    const adjustedPrevGeneration = this.getAdjustedGenerationSize(prevGeneration, newGridSize);
+    const rowsLength = prevGeneration.length;
+    const columsLength = prevGeneration[0].length;
 
-    for (let row = 0; row < newGridSize.rows; row++) {
+    for (let row = 0; row < rowsLength; row++) {
       newGeneration.push([]);
-      for (let column = 0; column < newGridSize.columns; column++) {
-        const neighbors = this.countNeighbors(adjustedPrevGeneration, row, column);
+      for (let column = 0; column < columsLength; column++) {
+        const neighbors = this.countNeighbors(prevGeneration, row, column);
         if (neighbors === 3) {
           newGeneration[row][column] = 1;
-        } else if (adjustedPrevGeneration[row][column] && neighbors === 2) {
+        } else if (prevGeneration[row][column] && neighbors === 2) {
           newGeneration[row][column] = 1;
         } else {
           newGeneration[row][column] = 0;
@@ -198,8 +199,19 @@ class App extends React.Component {
     this.setState({ rhythm: newRhythm });
   }
 
+  handleWindowResize() {
+    this.handleCellSizeChange(this.state.cellSize);
+  }
+
   handleCellSizeChange(newSize) {
-    this.setState({ cellSize: newSize });
+    this.setState((prevState) => {
+      const newGridSize = this.getNewGridSize(newSize);
+      const adjustedGeneration = this.getAdjustedGenerationSize(prevState.generation, newGridSize);
+      return { 
+        cellSize: newSize,
+        generation: adjustedGeneration
+      };
+    });
   }
 
   handleRandomLexicon() {
