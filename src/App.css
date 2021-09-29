@@ -1,8 +1,17 @@
 /* ----- Custom Properties ----- */
 :root {
+  --cell-border-radius: 0;
   --cell-off: #404040;
   --cell-on: #40BB6C;
-  --cell-border-radius: 0;
+}
+.grid {
+  background: var(--cell-off);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.grid-row {
+  display: flex;
 }
 .cell {
   border-radius: var(--cell-border-radius);
@@ -42,8 +51,7 @@
 }
 .control,
 .counter,
-.info,
-.logo {
+.info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,17 +87,25 @@ button:active {
               inset -4px -4px 8px #FFFFFF10;
   padding: 11px 9px 9px 11px;
 }
-.controls .control .random-btn {
+.random-pattern-btn {
   background: rgb(64,187,108);
-  background: linear-gradient(240deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
+  background: linear-gradient(240deg,
+            rgba(0,176,144,1) 0%,
+            rgba(64,187,108,1) 28%,
+            rgba(82,190,98,1) 68%,
+            rgba(150,201,61,1) 100%);
   color: #111;
   font-weight: bold;
   letter-spacing: 0.5px;
   width: auto;
 }
-.controls .control .random-btn:hover {
+.random-pattern-btn:hover {
   background: rgb(150,201,61);
-  background: linear-gradient(60deg, rgba(0,176,144,1) 0%, rgba(64,187,108,1) 28%, rgba(82,190,98,1) 68%, rgba(150,201,61,1) 100%);
+  background: linear-gradient(60deg, 
+            rgba(0,176,144,1) 0%,  
+            rgba(64,187,108,1) 28%, 
+            rgba(82,190,98,1) 68%, 
+            rgba(150,201,61,1) 100%);
 }
 a {
   color: #0594ED;
@@ -109,28 +125,13 @@ a:visited {
 .control {
   width: fit-content;
 }
-
-/* ----- About Section ----- */
 .about .counter p {
   margin-bottom: 0;
   margin-right: 10px;
   text-shadow: 4px 4px 3px #000;
 }
-.about .logo img {
-  filter: drop-shadow(6px 6px 2px #000);
-  height: 74px;
-  margin-bottom: 5px;
-  width: auto;
-}
-.about .logo img:hover {
-  filter: drop-shadow(6px 6px 0px #000);
-}
-.about .logo img:active {
-  margin-top: 2px;
-  filter: drop-shadow(3px 3px 0px #000);
-}
 
-/* ----- Baner ----- */
+/* ----- Baners and Config Modal ----- */
 .baner {
   background: #00000075;
   border-radius: 4px;
@@ -143,23 +144,11 @@ a:visited {
   top: 100px;
   transform: translateX(-50%);
 }
-
-/* ----- Config Modal ----- */
 #config-modal .modal {
   max-width: 400px;
 }
 
-/* ----- Animations ----- */
-@keyframes rotate360 {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-}
-.swirly-plant {
-  animation-name: rotate360;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-}
-
+/* ----- Animation ----- */
 @keyframes fade-out {
 	0% { opacity: 1 }
 	100% { opacity: 0 }
@@ -175,13 +164,9 @@ a:visited {
 @media screen and (max-width: 700px) {
   .control,
   .counter,
-  .info,
-  .logo {
+  .info {
     margin: 0 5px;
     text-align: center;
-  }
-  .controls .config {
-    display: none;
   }
   .controls-container {
     height: 80px;
@@ -196,21 +181,17 @@ a:visited {
   button:active {
     padding: 6px 4px 4px 6px;
   }
-  .controls .control .random-btn {
+  .random-pattern-btn {
     font-size: 14px;
   }
   .about .counter p {
     margin-right: 4px;
   }
-  .logo {
-    display: none;
-  }
 }
 @media screen and (max-width: 450px) {
   .control,
   .counter,
-  .info,
-  .logo {
+  .info {
     margin: 0 4px;
   }
   .controls-container {

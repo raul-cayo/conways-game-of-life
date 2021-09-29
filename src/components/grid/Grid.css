@@ -1,9 +1,0 @@
-.grid {
-  display: flex;
-  background: var(--cell-off);
-  flex-direction: column;
-  justify-content: center;
-}
-.grid-row {
-  display: flex;
-}

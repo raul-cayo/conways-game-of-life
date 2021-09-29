@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from './components/grid/Grid';
 import ConfigController from './components/controls/ConfigController';
+import Logo from './components/Logo';
 import Modal from './components/modals/Modal';
 import InfoModal from './components/modals/InfoModal';
 import {withTranslation} from 'react-i18next';
@@ -8,7 +9,6 @@ import {getPatternByName, getRandomPattern} from './util/lexicon';
 import {showBaner} from './util/baners';
 import './reset.css';
 import './App.css';
-import PlantImage from './images/plant.png';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,14 +27,7 @@ class App extends React.Component {
       isPaused: false
     };
 
-    this.appLanguage = { changed: false, langCode: 'en' };
-    const { t, i18n } = this.props;
-    const language = window.navigator.userLanguage || window.navigator.language;
-    if (language.startsWith('es')) {
-      i18n.changeLanguage('es');
-      this.appLanguage.langCode = 'es';
-    }
-
+    const { t } = this.props;
     showBaner(t('baners.game_of_life'), 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
@@ -47,7 +40,6 @@ class App extends React.Component {
     this.handleClearGrid = this.handleClearGrid.bind(this);
     this.handleOpenConfig = this.handleOpenConfig.bind(this);
     this.handleCellClick = this.handleCellClick.bind(this);
-    this.handlePlantClick = this.handlePlantClick.bind(this);
   }
 
   // ----- Lyfecycle Methods ----- //
@@ -243,7 +235,7 @@ class App extends React.Component {
     const gridSize = this.getNewGridSize(this.state.cellSize);
     const randomPattern = getRandomPattern();
     const adjustedPattern = this.getAdjustedSizeGeneration(randomPattern.grid, gridSize);
-    
+
     showBaner(randomPattern.name, 2000);
     this.setState({ 
       generation: adjustedPattern,
@@ -311,29 +303,6 @@ class App extends React.Component {
     infoModal.style.display = 'flex';
   }
 
-  handlePlantClick() {
-    const { t, i18n } = this.props;
-    if ( this.appLanguage.changed ) {
-      if ( this.appLanguage.langCode === 'en' ) {
-        i18n.changeLanguage('es');
-        this.appLanguage.langCode = 'es';
-      } else {
-        i18n.changeLanguage('en');
-        this.appLanguage.langCode = 'en';
-      }
-      showBaner(t('baners.lang_changed'), 1000);
-    } else {
-      showBaner(t('baners.click_again'), 1000);
-      this.appLanguage.changed = true;
-    }
-
-    const plant = document.querySelector('.about .logo img');
-    plant.classList.add('swirly-plant');
-    setTimeout(() => {
-      plant.classList.remove('swirly-plant');
-    }, 2000); // swirly-plant animation is 1.5s
-  }
-
   // ----- Render ----- //
   render() {
     const { t } = this.props;
@@ -348,7 +317,7 @@ class App extends React.Component {
           <div className="controls">
             <div className="control">
               <button type="button"
-                className="random-btn"
+                className="random-pattern-btn"
                 title={t('controls.tooltips.random_btn')}
                 onClick={this.handleRandomPattern}>
                 {t('controls.random')}
@@ -379,15 +348,13 @@ class App extends React.Component {
                   onClick={this.handleOpenConfig}>
                   <span className="material-icons">settings</span>
                 </button>
-              </div> : null
-            }
+              </div> : null }
             { window.innerWidth > 1100 ? 
               <ConfigController flexDirection="row"
                 rhythm={this.state.rhythm}
                 cellSize={this.state.cellSize}
                 rhythmHandler={this.handleRhythmChange}
-                cellSizeHandler={this.handleCellSizeChange}/> : null
-            }
+                cellSizeHandler={this.handleCellSizeChange}/> : null }
           </div>
 
           <div className="about">
@@ -401,9 +368,7 @@ class App extends React.Component {
                 <span className="material-icons">info</span>
               </button>
             </div>
-            <div className="logo">
-              <img onClick={this.handlePlantClick} alt="plant" src={PlantImage}/>
-            </div>
+            <Logo/>
           </div>
         </div>
         
