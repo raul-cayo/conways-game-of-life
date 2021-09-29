@@ -39,6 +39,7 @@ class App extends React.Component {
     showBaner(t('baners.game_of_life'), 3000);
 
     this.nextGenerationTicker = this.nextGenerationTicker.bind(this);
+    this.pauseGame = this.pauseGame.bind(this);
     this.handleRhythmChange = this.handleRhythmChange.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleCellSizeChange = this.handleCellSizeChange.bind(this);
@@ -208,79 +209,20 @@ class App extends React.Component {
     }
     return neighbors;
   }
+
+  pauseGame() {
+    this.setState((prevState) => {
+      clearTimeout(prevState.currentTimer);
+      return {
+        isPaused: true,
+        currentTimer: null
+      };
+    });
+  }
   
   // ----- Handlers ----- //
-  handleRhythmChange(newRhythm) {
-    this.setState({ rhythm: newRhythm });
-  }
-
   handleWindowResize() {
     this.handleCellSizeChange(this.state.cellSize);
-  }
-
-  handleCellSizeChange(newSize) {
-    this.setState((prevState) => {
-      const newGridSize = this.getNewGridSize(newSize);
-      const adjustedGeneration = this.getAdjustedSizeGeneration(prevState.generation, newGridSize);
-      return { 
-        cellSize: newSize,
-        generation: adjustedGeneration
-      };
-    });
-  }
-
-  handleRandomPattern() {
-    const term = getRandomPattern();
-    showBaner(term.name, 2000);
-    this.setState({ 
-      generation: term.grid,
-      counter: 0
-    });
-  }
-
-  handlePausePlayGame() {
-    if (this.state.isPaused) {
-      this.nextGenerationTicker();
-    } else {
-      this.setState((prevState) => {
-        clearTimeout(prevState.currentTimer);
-        return {
-          isPaused: true,
-          currentTimer: null
-        };
-      });
-    }
-  }
-
-  handleClearGrid() {
-    if (!this.state.isPaused) {
-      this.handlePausePlayGame();
-    }
-    this.setState((prevState) => {
-      const rowsLength = prevState.generation.length;
-      const columnsLength = prevState.generation[0].length;
-      const newGeneration = [];
-      const newRow = [];
-
-      for (let i = 0; i < columnsLength; i++) {
-        newRow.push(0);
-      }
-      for (let i = 0; i < rowsLength; i++) {
-        newGeneration.push(newRow);
-      }
-      return {
-        generation: newGeneration,
-        counter: 0
-      };
-    });
-  }
-
-  handleOpenConfig() {
-    if (!this.state.isPaused) {
-      this.handlePausePlayGame();
-    }
-    const configModal = document.getElementById('config-modal');
-    configModal.style.display = 'flex';
   }
 
   handleCellClick(row, column) {
@@ -295,6 +237,70 @@ class App extends React.Component {
     });
   }
 
+  handleRandomPattern() {
+    const pattern = getRandomPattern();
+    showBaner(pattern.name, 2000);
+    this.setState({ 
+      generation: pattern.grid,
+      counter: 0
+    });
+  }
+
+  handleRhythmChange(newRhythm) {
+    this.setState({ rhythm: newRhythm });
+  }
+
+  handleCellSizeChange(newSize) {
+    this.setState((prevState) => {
+      const newGridSize = this.getNewGridSize(newSize);
+      const adjustedGeneration = this.getAdjustedSizeGeneration(prevState.generation, newGridSize);
+      return { 
+        cellSize: newSize,
+        generation: adjustedGeneration
+      };
+    });
+  }
+
+  handlePausePlayGame() {
+    if (this.state.isPaused) {
+      this.nextGenerationTicker();
+    } else {
+      this.pauseGame();
+    }
+  }
+
+  handleClearGrid() {
+    if (!this.state.isPaused) {
+      this.pauseGame();
+    }
+    this.setState((prevState) => {
+      const rowsLength = prevState.generation.length;
+      const columnsLength = prevState.generation[0].length;
+      const newGeneration = [];
+      const newRow = [];
+
+      for (let i = 0; i < columnsLength; i++) {
+        newRow.push(0);
+      }
+      for (let i = 0; i < rowsLength; i++) {
+        newGeneration.push(newRow);
+      }
+
+      return {
+        generation: newGeneration,
+        counter: 0
+      };
+    });
+  }
+
+  handleOpenConfig() {
+    if (!this.state.isPaused) {
+      this.pauseGame();
+    }
+    const configModal = document.getElementById('config-modal');
+    configModal.style.display = 'flex';
+  }
+
   handleInfoClick() {
     const infoModal = document.getElementById('info-modal');
     infoModal.style.display = 'flex';
@@ -302,7 +308,6 @@ class App extends React.Component {
 
   handlePlantClick() {
     const { t, i18n } = this.props;
-
     if ( this.appLanguage.changed ) {
       if ( this.appLanguage.langCode === 'en' ) {
         i18n.changeLanguage('es');
