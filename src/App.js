@@ -321,9 +321,6 @@ class App extends React.Component {
   }
 
   handleOpenConfig() {
-    if (!this.state.isPaused) {
-      this.pauseGame();
-    }
     const configModal = document.getElementById('config-modal');
     configModal.style.display = 'flex';
   }
