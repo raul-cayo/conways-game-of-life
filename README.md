@@ -2,7 +2,7 @@
 
 # Getting Started with Create React App
 
-You can find this app hosted on http://the-game-of-life-app.herokuapp.com/
+You can find this app hosted at http://the-game-of-life-app.herokuapp.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
