@@ -75,7 +75,7 @@ const resources = {
         "modal_title": "¿Que es el Juego de la Vida de Conway?",
         "close_tooltip": "Cerrar",
         "game_description": "El Juego de la Vida de Conway es un autómata celular ideado por el matemático británico John Horton Conway en 1970. Se interactúa con el Juego de la Vida creando un estado inicial y observando cómo evoluciona. Produce patrones complejos e interesantes siguiendo algunas reglas.",
-        "rules": "Rules",
+        "rules": "Reglas",
         "rule_1": "Cualquier célula viva con menos de dos vecinos vivos muere, como por falta de población.",
         "rule_2": "Cualquier célula viva con dos o tres vecinos vivos vive en la siguiente generación.",
         "rule_3": "Cualquier célula viva con más de tres vecinos vivos muere, como por sobrepoblación.",
